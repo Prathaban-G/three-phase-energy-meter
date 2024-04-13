@@ -83,6 +83,9 @@
             <div class="card-body">
                 <div class="card-title text-center  h4 ">Login Here</div>
                 <div class="container-fluid">
+                        <div class="row">
+                            <h4 class="alert alert-danger text-center"></h4>
+                        </div>
                    
                         <div class="form-floating mt-2">
                             <input type="email" class="form-control" id="email" name="email" placeholder="Email">
@@ -158,6 +161,7 @@ document.getElementById("login").addEventListener("click",function(){
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        document.getElementById("loginError").innerHTML="Your Email & Password does not match";
       });
     
     } );
