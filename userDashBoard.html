@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olive Energy Meter</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- ...............Goggle chart............ -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Include FusionCharts core library
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+ Include Fusion theme (optional) 
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script> -->
+    <script src="scrollTop.js"></script>
+    <link rel="stylesheet" href="universal.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            line-height: 2px;
+            letter-spacing: 1px;
+
+        }
+
+        body {
+            background-color: rgb(227, 229, 231);
+            padding: 20px;
+        }
+
+        .meter-dash {
+            background-color: rgb(204, 207, 211);
+
+        }
+
+        .breadcrumb-item a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        /* Styling for sections */
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid main">
+        <div class="container-fluid nav-section mb-5 block">
+            <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+                    </a>
+                    <h5 class="nav-title text-muted mt-2">Olive Energy Meter</h5>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse " id="mynavbar">
+                        <ul class="navbar-nav me-auto">
+
+
+                        </ul>
+
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="text" placeholder="Search">
+                            <button class="btn btn-primary me-5 " style="right: 100px !important;"
+                                type="button">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+
+
+        </div>
+        <button onclick="scrollToTop()" id="scrollToTop" class="btn btn-secondary" title="Go to top"><i
+                class="fa fa-arrow-up" aria-hidden="true"></i></button>
+
+        <div class="container-fluid">
+            <div class="row pt-5 block">
+                <nav aria-label="breadcrumb ">
+
+                    <ol class="breadcrumb mt-2  ">
+                        <li class="breadcrumb-item"><a href="userHome.html"><i class="fa fa-home "></i></a></li>
+
+                        </li>
+                        <li class="breadcrumb-item  pt-2" aria-current="page"><a href="userDashBoard.html"
+                                id="dashBoardPage"> </a>
+                        </li>
+                        <!-- <li class="breadcrumb-item active pt-2 active" aria-current="page"><a href="#"></a></li> -->
+                        <div class="alert alert-secondary  " style="position: absolute; top: 80px;right: 0;">
+                            <div id="time"></div>
+                        </div>
+                        <div class="container-fluid d-flex justify-content-end">
+
+                            <button class="btn btn-primary float-end ms-2 py-1 px-3"><a href="home.html" style="  color: inherit;
+                            text-decoration: inherit;"><i class="fa fa-reply pe-2" aria-hidden="true"></i>
+                                    back</a></button>
+                        </div>
+
+                    </ol>
+                </nav>
+
+            </div>
+
+        </div>
+        <div class="container-fluid meter-dash pb-5 block">
+            <div class="row  ">
+                <div class="h4 col-4 ps-5 mt-3">Live Monitoring</div>
+                <div class="col-lg-8 d-flex justify-content-end">
+                    <div class="alert alert-primary mt-1 me-2" style="margin-bottom: 0 !important;"><span
+                            class="me-2 m">Device status</span> <i class="fa fa-circle   pd-2" id="deviceStatus"
+                            style="font-size: 20px;" aria-hidden="true"></i></div>
+                    <button class="btn btn-success mt-1" id="getAllData"><i class="fa fa-download me-1"></i>Download
+                    </button>
+                    <button class="btn btn-danger mt-1 ms-2" id="refresh"><i
+                            class="fa fa-refresh me-2"></i>Refresh</button>
+                </div>
+
+
+
+            </div>
+
+            <!-- <div class="alert mt-3 alert-info float-end" style="position:absolute;top: 60px;right: 10px; ">Updated Every <strong>6 </strong>s  once -->
+
+
+
+        </div>
+
+        <div class="row ps-2  mt-3 block">
+            <div class="col-lg-4 ">
+                <div class="bg-light   border border-2 border-secondary">
+                    <div id="chart_div" class="m-5"></div>
+                    <div class="h3 text-center text-primary ">R-Phase Voltage</div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 ">
+                <div class="bg-light   border border-2 border-secondary">
+                    <div id="chart_div1" class="m-5"></div>
+                    <div class="h3 text-center text-primary ">Y-Phase Voltage</div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 ">
+                <div class="bg-light   border border-2 border-secondary">
+                    <div id="chart_div2" class="m-5"></div>
+                    <div class="h3 text-center text-primary ">B-Phase Voltage</div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="row ps-2  mt-3 block">
+            <div class="col-lg-4 ">
+                <div class="bg-light   border border-2 border-secondary">
+                    <div id="chart_div3" class="m-5"></div>
+                    <div class="h3 text-center text-primary ">R-Phase Curreent</div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 ">
+                <div class="bg-light   border border-2 border-secondary">
+                    <div id="chart_div4" class="m-5"></div>
+                    <div class="h3 text-center text-primary ">Y-Phase Current</div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 ">
+                <div class="bg-light   border border-2 border-secondary">
+                    <div id="chart_div5" class="m-5"></div>
+                    <div class="h3 text-center text-primary ">B-Phase Current</div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="row ps-2  mt-3 block">
+            <div class="col-lg-4 ">
+                <div class="bg-light p-4  border border-2 border-secondary">
+                    <div id="chart_div6" class="m-5"></div>
+                    <div class="h3 text-center text-primary ">R-Y Voltage</div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 ">
+                <div class="bg-light p-4  border border-2 border-secondary">
+                    <div id="chart_div7" class="m-5"></div>
+                    <div class="h3 text-center text-primary ">Y-B Voltage</div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 ">
+                <div class="bg-light p-4  border border-2 border-secondary">
+                    <div id="chart_div8" class="m-5"></div>
+                    <div class="h3 text-center text-primary ">B-R Voltage</div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    </div>
+    <footer class="mt-3 text-center text-primary">&copy;All Rights Reserved Olive IOT</footer>
+</body>
+<!-- <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+  
+    const firebaseConfig = {
+        apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
+            authDomain: "three-phase-energy-meter.firebaseapp.com",
+            projectId: "three-phase-energy-meter",
+            storageBucket: "three-phase-energy-meter.appspot.com",
+            messagingSenderId: "643707481883",
+            appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
+            measurementId: "G-ZC6S4GQJD3"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const dataRef = ref(db, 'mqttData/data');
+  
+    // Assign global variables
+    let globalVariables = {};
+  
+    onValue(dataRef, (snapshot) => {
+      const dataObject = snapshot.val();
+      if (dataObject && typeof dataObject === 'object') {
+        for (const key in dataObject) {
+          if (dataObject.hasOwnProperty(key)) {
+            globalVariables[key] = dataObject[key];
+          }
+        }
+        // Attach to window after data is retrieved
+        Object.assign(window, globalVariables);
+        console.log("Global variables assigned:", globalVariables);
+      } else {
+        console.error("Data object is null or not an object");
+      }
+    });
+  </script>
+   -->
+<script type="module">
+
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+    //  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getDatabase, ref, set, child, get, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+
+    const firebaseConfig = {
+
+        apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
+        authDomain: "three-phase-energy-meter.firebaseapp.com",
+        projectId: "three-phase-energy-meter",
+        storageBucket: "three-phase-energy-meter.appspot.com",
+        messagingSenderId: "643707481883",
+        appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
+        measurementId: "G-ZC6S4GQJD3"
+    };
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const database = getDatabase(app);
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectName = urlParams.get('projectName');
+    console.log(projectName);
+
+    document.getElementById('dashBoardPage').innerHTML = projectName;
+    // Fill the Input Fields
+    function getProjectData(projectName) {
+        const projectRef12 = ref(database, `mqttData/${projectName}/data`);
+        onValue(projectRef12, (snapshot) => {
+            if (snapshot.exists()) {
+                const projectData = snapshot.val();
+                // Update the page data here based on projectData
+
+                var dataString = snapshot.val(); // Get the data as a string
+
+                // Parse the string into a JavaScript object
+                var dataObject = null;
+                try {
+                    dataObject = JSON.parse(dataString);
+                } catch (e) {
+                    console.error("Error parsing JSON:", e);
+                    return; // Exit the function if parsing fails
+                }
+
+                // var updateTime = new Date().toLocaleString();
+                // console.log("Document element updated at:", updateTime);
+               
+
+                // Check if dataObject is not null or undefined before accessing its properties
+                if (dataObject && typeof dataObject === 'object') {
+                    var Timestamp = dataObject.timestamp;
+                    var PV01 = dataObject.PV01;
+                    var PV02 = dataObject.PV02;
+                    var PV03 = dataObject.PV03;
+                    var PV04 = dataObject.PV04;
+                    var PV05 = dataObject.PV05;
+                    var PV06 = dataObject.PV06;
+                    var PV07 = dataObject.PV07;
+                    var PV08 = dataObject.PV08;
+                    var PV09 = dataObject.PV09;
+                    var PV10 = dataObject.PV10;
+                    document.getElementById("time").innerHTML = 'Last Updated  : ' + Timestamp;
+                   
+
+                    // Repeat this for all the fields you want to access
+
+                    //   console.log("PV01:", PV01);
+                    //   console.log("PV02:", PV02);
+                    //   console.log("PV03:", PV03);
+                    //   console.log("PV04:", PV04);
+                    //   console.log("PV05:", PV05);
+                    //   console.log("PV06:", PV06);
+                    //   console.log("PV07:", PV07);
+                    //   console.log("PV08:", PV08);
+                    //   console.log("PV09:", PV09);
+                    //  
+                    //  console.log("PV10:", PV10);
+                    window.myGlobalVariable1 = PV01;
+
+                    window.myGlobalVariable2 = PV02;
+                    window.myGlobalVariable3 = PV03;
+                    window.myGlobalVariable4 = PV04;
+                    window.myGlobalVariable5 = PV05;
+                    window.myGlobalVariable6 = PV06;
+                    window.myGlobalVariable7 = PV07;
+                    window.myGlobalVariable8 = PV08;
+                    window.myGlobalVariable9 = PV09;
+                    window.myGlobalVariable10 = PV10;
+                    console.log(window.myGlobalVariable10);
+                    const statusIcon = document.getElementById('deviceStatus');
+
+
+                    // Set the class based on the status value
+                    if (window.myGlobalVariable10 === 1) {
+                        statusIcon.classList.add('text-success');
+
+                    } else {
+                        statusIcon.classList.add('text-danger');
+                    }
+                }
+                // reloadPage();
+            }
+            else {
+                console.error('Project data not found.');
+            }
+        })
+            .catch((error) => {
+                console.error('Error getting project data:', error);
+            });
+    }
+
+    // Call getProjectData when the page loads to fill input fields with project data
+    document.addEventListener('DOMContentLoaded', () => {
+        getProjectData(projectName);
+
+
+
+    });
+
+    function reloadPage() {
+        location.reload();
+    }
+
+    // Initialize Firebase
+
+
+
+
+
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart1);
+
+    function drawChart1() {
+
+        var data1 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['R-V', 220],
+
+        ]);
+
+        var options1 = {
+            width: 300, height: 300,
+            redFrom: 260, redTo: 300,
+            yellowFrom: 245, yellowTo: 260,
+            minorTicks: 5,
+            max: 300,
+            min: 200
+        };
+
+        var chart1 = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart1.draw(data1, options1);
+
+        setInterval(function () {
+            const val = Math.ceil(window.myGlobalVariable1);
+
+            data1.setValue(0, 1, val);
+            chart1.draw(data1, options1);
+        }, 4000);
+
+    }
+
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart2);
+
+    function drawChart2() {
+
+        var data2 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['Y-V', 245],
+
+        ]);
+
+        var options2 = {
+            width: 400, height: 300,
+            redFrom: 260, redTo: 300,
+            yellowFrom: 245, yellowTo: 260,
+            minorTicks: 5,
+            max: 300,
+            min: 200
+        };
+
+        var chart2 = new google.visualization.Gauge(document.getElementById('chart_div1'));
+
+        chart2.draw(data2, options2);
+
+        setInterval(function () {
+            data2.setValue(0, 1, Math.ceil(window.myGlobalVariable2));
+            chart2.draw(data2, options2);
+        }, 6000);
+
+    }
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart3);
+
+    function drawChart3() {
+
+        var data3 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['B-V', 240],
+
+        ]);
+
+        var options3 = {
+            width: 400, height: 300,
+            redFrom: 260, redTo: 300,
+            yellowFrom: 245, yellowTo: 260,
+            minorTicks: 5,
+            max: 300,
+            min: 200
+        };
+
+        var chart3 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+
+        chart3.draw(data3, options3);
+
+        setInterval(function () {
+            data3.setValue(0, 1, Math.ceil(window.myGlobalVariable3));
+            chart3.draw(data3, options3);
+        }, 6000);
+
+    }
+    // Second row
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart4);
+
+    function drawChart4() {
+
+        var data4 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['R-C', 278],
+
+        ]);
+
+        var options4 = {
+            width: 400, height: 300,
+            redFrom: 260, redTo: 300,
+            yellowFrom: 245, yellowTo: 260,
+            minorTicks: 5,
+            max: 300,
+            min: 200
+        };
+
+        var chart4 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+
+        chart4.draw(data4, options4);
+
+        setInterval(function () {
+            data4.setValue(0, 1, Math.ceil(window.myGlobalVariable4));
+            chart4.draw(data4, options4);
+        }, 6000);
+
+    }
+
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart5);
+
+    function drawChart5() {
+
+        var data5 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['Y-C', 270],
+
+        ]);
+
+        var options5 = {
+            width: 400, height: 300,
+            redFrom: 260, redTo: 300,
+            yellowFrom: 245, yellowTo: 260,
+            minorTicks: 5,
+            max: 300,
+            min: 200
+        };
+
+        var chart5 = new google.visualization.Gauge(document.getElementById('chart_div4'));
+
+        chart5.draw(data5, options5);
+
+        setInterval(function () {
+            data5.setValue(0, 1, Math.ceil(window.myGlobalVariable5));
+            chart5.draw(data5, options5);
+        }, 6000);
+
+    }
+
+
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart6);
+
+    function drawChart6() {
+
+        var data6 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['B-C', 260],
+
+        ]);
+
+        var options6 = {
+            width: 400, height: 300,
+            redFrom: 260, redTo: 300,
+            yellowFrom: 245, yellowTo: 260,
+            minorTicks: 5,
+            max: 300,
+            min: 200
+        };
+
+        var chart6 = new google.visualization.Gauge(document.getElementById('chart_div5'));
+
+        chart6.draw(data6, options6);
+
+        setInterval(function () {
+            data6.setValue(0, 1, Math.ceil(window.myGlobalVariable6));
+            chart6.draw(data6, options6);
+        }, 6000);
+
+    }
+    // Third Row
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart7);
+
+    function drawChart7() {
+
+        var data7 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['RY-V', 280],
+
+        ]);
+
+        var options7 = {
+            width: 400, height: 300,
+            redFrom: 260, redTo: 300,
+            yellowFrom: 245, yellowTo: 260,
+            minorTicks: 5,
+            max: 300,
+            min: 200
+        };
+
+        var chart7 = new google.visualization.Gauge(document.getElementById('chart_div6'));
+
+        chart7.draw(data7, options7);
+
+        setInterval(function () {
+            data7.setValue(0, 1, Math.ceil(window.myGlobalVariable7));
+            chart7.draw(data7, options7);
+        }, 6000);
+
+    }
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart8);
+
+    function drawChart8() {
+
+        var data8 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['YB-V', 270],
+
+        ]);
+
+        var options8 = {
+            width: 400, height: 300,
+            redFrom: 260, redTo: 300,
+            yellowFrom: 245, yellowTo: 260,
+            minorTicks: 5,
+            max: 300,
+            min: 200
+        };
+
+        var chart8 = new google.visualization.Gauge(document.getElementById('chart_div7'));
+
+        chart8.draw(data8, options8);
+
+        setInterval(function () {
+            data8.setValue(0, 1, Math.ceil(window.myGlobalVariable8));
+            chart8.draw(data8, options8);
+        }, 6000);
+
+    }
+
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart9);
+
+    function drawChart9() {
+
+        var data9 = google.visualization.arrayToDataTable([
+            ['Label', 'Value'],
+            ['RB-V', 280],
+
+        ]);
+
+        var options9 = {
+            width: 400, height: 300,
+            redFrom: 260, redTo: 300,
+            yellowFrom: 245, yellowTo: 260,
+            minorTicks: 5,
+            max: 300,
+            min: 200
+        };
+
+        var chart9 = new google.visualization.Gauge(document.getElementById('chart_div8'));
+
+        chart9.draw(data9, options9);
+
+        setInterval(function () {
+            data9.setValue(0, 1, Math.ceil(window.myGlobalVariable9));
+            chart9.draw(data9, options9);
+        }, 6000);
+
+    }
+
+</script>
+
+
+
+<script type="module">
+    // Initialize Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getDatabase, ref, query, orderByChild, startAt, endAt, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+
+
+    const firebaseConfig1 = {
+        apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
+        authDomain: "three-phase-energy-meter.firebaseapp.com",
+        projectId: "three-phase-energy-meter",
+        storageBucket: "three-phase-energy-meter.appspot.com",
+        messagingSenderId: "643707481883",
+        appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
+        measurementId: "G-ZC6S4GQJD3"
+    };
+
+    // Initialize Firebase
+    const app1 = initializeApp(firebaseConfig1);
+    const db = getDatabase(app1);
+    console.log(db);
+
+    // Function to retrieve data from Firebase
+    document.getElementById('getAllData').addEventListener('click', () => {
+        try {
+            const dataRef = ref(db, 'mqttDataBase/data'); // Update the path to match your Firebase data path
+
+            // Fetch all data under 'data'
+            onValue(dataRef, (snapshot) => {
+                var dataString = snapshot.val(); // Get all data as an object
+
+                if (dataString) {
+                    // Convert data object to CSV format
+                    let csvContent = "Timestamp,PV01,PV02,PV03,PV04,PV05,PV06,PV07,PV08,PV09,Device Status \n"; // CSV header
+                    Object.keys(dataString).forEach((timestamp) => {
+                        var rowData = null;
+                        try {
+                            rowData = JSON.parse(dataString);
+                        } catch (e) {
+                            console.error("Error parsing JSON:", e);
+                            return; // Exit the function if parsing fails
+                        } // Parse JSON data
+                        const rowValues = [
+                            rowData.timestamp,
+                            rowData.PV01,
+                            rowData.PV02,
+                            rowData.PV03,
+                            rowData.PV04,
+                            rowData.PV05,
+                            rowData.PV06,
+                            rowData.PV07,
+                            rowData.PV08,
+                            rowData.PV09,
+                            rowData.PV10
+                        ];
+                        csvContent += rowValues.join(",") + "\n";
+                    });
+                    console.log(csvContent)
+                    // Download the CSV file
+                    const downloadLink = document.createElement("a");
+                    const blob = new Blob([csvContent], { type: "text/csv" });
+                    const url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+                    downloadLink.download = `mqttData_${currentDate}.csv`; // Dynamically set the file name
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                } else {
+                    console.error('No data available.');
+                }
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+    document.getElementById("refresh").addEventListener("click", () => {
+
+        window.location.reload();
+    })
+</script>
+
+
+
+</html>

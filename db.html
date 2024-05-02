@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Table</title>
+
+</head>
+<body>
+<h1>Data Table</h1>
+
+<!-- Date selection -->
+<label for="startDate">Start Date:</label>
+<input type="date" id="startDate">
+<label for="endDate">End Date:</label>
+<input type="date" id="endDate">
+<button id="getAllData">Get Data</button>
+
+<!-- Table to display data -->
+<table id="dataTable" border="1">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>PV01</th>
+      <th>PV02</th>
+      <th>PV03</th>
+      <th>PV04</th>
+      <th>PV05</th>
+      <th>PV06</th>
+      <th>PV07</th>
+      <th>PV08</th>
+      <th>PV09</th>
+      <th>PV10</th>
+    </tr>
+  </thead>
+  <tbody id="dataBody">
+    <!-- Data will be populated here -->
+  </tbody>
+</table>
+
+<!-- Download button -->
+<button id="downloadData">Download Data</button>
+<script type="module">
+    // Initialize Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import{ getDatabase, ref, query, orderByChild, startAt, endAt,onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
+            authDomain: "three-phase-energy-meter.firebaseapp.com",
+            projectId: "three-phase-energy-meter",
+            storageBucket: "three-phase-energy-meter.appspot.com",
+            messagingSenderId: "643707481883",
+            appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
+            measurementId: "G-ZC6S4GQJD3"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    console.log(db);
+
+    // Function to retrieve data from Firebase
+    document.getElementById('getAllData').addEventListener('click', () => {
+    try {
+        const dataRef = ref(db, 'mqttDataBase/data'); // Update the path to match your Firebase data path
+        
+        // Fetch all data under 'data'
+        onValue(dataRef, (snapshot) => {
+            var dataString = snapshot.val(); // Get all data as an object
+            
+            if (dataString) {
+                // Convert data object to CSV format
+                let csvContent = "Timestamp,PV01,PV02,PV03,PV04,PV05,PV06,PV07,PV08,PV09,Device Status \n"; // CSV header
+                Object.keys(dataString).forEach((timestamp) => {
+                    var rowData = null;
+                        try {
+                    rowData = JSON.parse(dataString);
+                     } catch (e) {
+      console.error("Error parsing JSON:", e);
+      return; // Exit the function if parsing fails
+    } // Parse JSON data
+                    const rowValues = [
+                        rowData.timestamp,
+                        rowData.PV01,
+                        rowData.PV02,
+                        rowData.PV03,
+                        rowData.PV04,
+                        rowData.PV05,
+                        rowData.PV06,
+                        rowData.PV07,
+                        rowData.PV08,
+                        rowData.PV09,
+                        rowData.PV10
+                    ];
+                    csvContent += rowValues.join(",") + "\n";
+                });
+                console.log(csvContent)
+                // Download the CSV file
+                const downloadLink = document.createElement("a");
+                const blob = new Blob([csvContent], { type: "text/csv" });
+                const url = URL.createObjectURL(blob);
+                downloadLink.href = url;
+                const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+                downloadLink.download = `mqttData_${currentDate}.csv`; // Dynamically set the file name
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            } else {
+                console.error('No data available.');
+            }
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+</script>
+
+</body>
+</html>

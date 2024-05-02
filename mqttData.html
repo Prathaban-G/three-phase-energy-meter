@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT </title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.5.0/mqttws31.min.js"></script> -->
+</head>
+<body>
+    <div id="sensorData">
+        <p>Sensor Value: <span id="sensorValue"></span></p>
+        <p>Timestamp: <span id="timestamp"></span></p>
+    </div>
+    
+    
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.2.7/mqtt.min.js"></script>
+<script type="module">
+  const brokerUrl = 'mqtt://mqtt-dashboard.com:1883'; // MQTT URL with the appropriate port
+  const client = mqtt.connect(brokerUrl);
+
+  client.on('connect', () => {
+    console.log('Connected to MQTT broker');
+    client.subscribe('my/testtopic123'); // Subscribe to a topic
+  });
+
+  client.on('message', (topic, message) => {
+    console.log(`Received message on topic ${topic}: ${message.toString()}`);
+  });
+
+  client.publish('my/testtopic123', 'Hello, MQTT!');
+</script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.2.7/mqtt.min.js"></script>
+<script>
+    
+  const brokerUrl = 'mqtt://mqtt-dashboard.com:1883'; // WebSocket URL with the appropriate port
+  var client = mqtt.connect(brokerUrl);
+
+  client.on('connect', () => {
+    console.log('Connected to MQTT broker over WebSocket');
+    client.subscribe('my/testtopic123'); // Subscribe to a topic
+
+    client.on('message', (topic, message) => {
+      console.log(`Received message on topic ${topic}: ${message.toString()}`);
+    });
+
+    client.publish('my/testtopic123', 'Hello, MQTT over WebSocket!');
+  });
+
+  client.on('error', (error) => {
+    console.error('Error connecting to MQTT broker:', error);
+  });
+//   client.on('message', (topic, message) => {
+//     console.log(`Received message on topic ${topic}: ${message.toString()}`);
+//   });
+
+ 
+</script> -->
+<!-- Include paho-mqtt library -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.5.0/mqttws31.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.0/paho-mqtt.js" integrity="sha512-p8OrcnawEEpEiY7S96nMeaShY5AMcdRFYgnaR0ZmOgMSgL9pLNE4x5+MB0FTol7GeJGzEd9m4MAmmD8urOscvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<!-- <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<script  type="module">
+
+    const brokerUrl = 'mqtt-dashboard.com';
+    const port=1883;
+   const client = mqtt.connect(brokerUrl,port);
+
+client.on('connect', () => {
+  console.log('Connected to MQTT broker');
+  client.subscribe('my/testtopic123'); // Subscribe to a topic
+});
+
+client.on('message', (topic, message) => {
+  console.log(`Received message on topic ${topic}: ${message.toString()}`);
+});
+client.publish('my/testtopic123', 'Hello, MQTT!'); 
+
+//     const client = new Paho.MQTT.client("mqtt-dashboard.com", 1883, "clientId-nYq3XiWCYp");
+    
+
+// client.onMessageArrived = function (message) {
+//     const payload = message.payloadString;
+//     const data = JSON.parse(payload);
+//     updateContent(data);
+// };
+
+// client.connect({
+//     onSuccess: () => {
+//         client.subscribe("testtopic/740");
+//         // client.subscribe("topic2");
+//     },
+//     onFailure: (error) => {
+//         console.error("MQTT connection failed:", error);
+//     }
+// });
+
+// function updateContent(data) {
+//     document.getElementById("sensorValue").textContent = data.value;
+//     document.getElementById("timestamp").textContent = data.timestamp;
+// }
+
+<!-- </script> -->
+</html>

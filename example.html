@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy Meter Dashboard</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .container {
+        margin-top: 50px;
+    }
+
+    .meter-container {
+        width: 200px;
+        height: 200px;
+        border-radius: 0 0 15px 15px; /* Top left and top right corners are rounded */
+        background: #f1f1f1;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .meter-needle {
+        width: 2px;
+        height: 100px;
+        background: #333;
+        position: absolute;
+        left: 50%;
+        transform-origin: bottom;
+        transform: translateX(-50%) rotate(0deg);
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .meter-value {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Energy Meter Dashboard</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="meter-container">
+                <div class="meter-needle" id="meter-needle"></div>
+            </div>
+            <div class="meter-value" id="meter-value">0 kWh</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateMeter(value) {
+        const needle = document.getElementById('meter-needle');
+        const meterValue = document.getElementById('meter-value');
+        const degrees = value * 180 / 100; // Assuming 100 kWh is max
+
+        needle.style.transform = `translateX(-50%) rotate(${degrees}deg)`;
+        meterValue.textContent = `${value} kWh`;
+    }
+
+    // Example: Update meter every 3 seconds
+    setInterval(() => {
+        const randomValue = Math.floor(Math.random() * 100); // Random value between 0 and 100
+        updateMeter(randomValue);
+    }, 3000);
+</script>
+</body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olive Energy Meter</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background: rgb(201, 195, 195);
+    }
+
+  
+        #expandableDiv {
+         
+            transition: all 0.5s ease;
+        }
+        .expanded {
+          position: fixed;
+            top: 100px;
+            left: 0;
+            width: 90%;
+            height: 100%;
+            z-index: 1000;
+        }
+    .breadcrumb-item a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    .footer {
+      position: relative;
+      bottom: 0;
+      left: 0;
+      /* Make sure the footer spans the full width */
+      width: 100%;
+      /* Ensure the footer spans the full width */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* Center vertically */
+      background-color: #333;
+      /* Just for visualization */
+      color: white;
+      /* Just for visualization */
+    }
+    #logoutCard1 {
+      position: absolute;
+      top: 60px; /* Adjust this value as needed */
+      right: 0;
+      background-color: #d1cbcb;
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000; /* Ensure the card appears above other elements */
+    }
+    
+  </style>
+  <link rel="stylesheet" href="universal.css">
+</head>
+
+<body>
+  <div class="con"></div>
+  <div class="container-fluid main">
+    <div class="container-fluid nav-section mb-5">
+      <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+          </a>
+          <h5 class="nav-title text-muted mt-2">Olive Energy Meter</h5>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse " id="mynavbar">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link " href="home.html">Home</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link " href="addProjects.html">Project </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="addUser.html">User </a>
+            </li>
+            </ul>
+            <div >
+              
+
+              <form id="searchForm" class="d-flex">
+                  <input id="searchInput"  list="page"  class="form-control me-2" type="text" placeholder="Search">
+                  <datalist id="page">
+                    <option value="home">
+                    <option value="project">
+                    <option value="user">
+                 
+                  </datalist>
+                  <button id="searchButton" class="btn btn-primary me-5" type="submit">Search</button>
+              </form>
+              <div id="searchResults"></div>
+          </div>
+            <div id="logoutIcon" style="cursor: pointer;">
+              <i class="fa fa-sign-out text-muted" aria-hidden="true" style="font-size: 25px;"></i>
+            </div>
+          
+            <!-- Logout confirmation card -->
+            <div id="logoutCard1" style="display: none;">
+              <i class="ms-5 fa fa-user text-primary " aria-hidden="true" style="font-size: 50px;"></i>
+              <p class="text-dark">Are you sure<br> you  want to logout?</p>
+              <button id="logOut" class="btn btn-danger text-white">Logout</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+    </div>
+    <button onclick="scrollToTop()" id="scrollToTop"  class="btn btn-secondary" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+    <div class="container-fluid main-section mt-5">
+      <div class="row mt-5 pt-5 ps-3 ">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="home.html"><i class="fa fa-home "></i> Home </a></i></li>
+
+
+
+        </ul>
+      </div>
+
+      <div class="row mt-3 ">
+        <div class="col-8 aside-section main-item">
+          <div class="row">
+          
+            <div class="col-5 me-3 bg-white p-3    border border-secondary border-3" style="height: 380px;">
+              <div class="card   expandable-card" id="expandCard">
+                <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;"> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </button></div> -->
+               
+                <div class="card-body ">
+  
+                  <div class="card-title h5 ">Project Summary</div>
+                  <div class="card-text h5 text-secondary">"Developing a cutting-edge system for real-time monitoring of three-phase energy consumption, our project aims to enhance efficiency and reliability in power management."
+
+                    "Our focus on accurate data analysis and fault detection ensures proactive maintenance, cost savings, and optimized energy usage."
+                    
+                   </div>
+                 
+            </div>
+          </div>
+          </div>
+            
+            <div class="col-6 ms-3 bg-white p-3    border border-secondary border-3 expandableDiv" style="height: 380px;" >
+              <div class="card   expandable-card" id="expandCard">
+                <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;"> <button class="fullViewButton btn" ><i class="fa fa-arrows-alt" aria-hidden="true"></i></button> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </button></div> -->
+               
+                <div class="card-body mt-3">
+  
+              <div id="piechart_3d" style="width: 100%; height: 300px;"></div>
+            </div>
+          </div>
+          </div>
+          </div>
+
+           
+                 
+
+              
+          <div class="row bg-white mt-4  p-4 border border-secondary border-3 expandableDiv me-4" style="height: 600px;" >
+          
+            <div class="card mb-sm-5  expandable-card" id="expandCard">
+              
+              <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;">
+                <button class="fullViewButton btn" ><i class="fa fa-arrows-alt" aria-hidden="true"></i></button> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+              </button></div> -->
+             
+              <div class="card-body mt-3">
+
+            <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+          </div>
+        </div>
+        </div>
+
+        
+          <div class="row table-menu mb-5">
+            <div class="container mt-5 col-12 border-top border-primary pt-4 " style="background-color: rgb(216, 209, 209);" id="tableContent">
+             <div class="row">
+              <div class="col-lg-4"><div class="h4 text-secondary">Project details</div></div>
+              <div class=" col-lg-8 container-fluid d-flex justify-content-end">
+               
+                <div class="form d-flex  ">
+                  <button class="btn btn-danger  me-2 w-50" id="refresh"><i class="fa fa-refresh me-2" ></i>Refresh</button>
+                    <input type="text" name="search" id="search" class="form-control me-1" size="50"
+                        placeholder="Search Here" onkeyup="myFunction()">
+                   
+                </div></div></div>
+              
+         
+
+              <table class="table table-primary table-bordered mt-3  table-hover table-responsive" id="usersTable">
+                <thead>
+                  <tr>
+                    <th class="py-3">No</th>
+                    <th class="py-3">Project Name </th>
+                    <th class="py-3">Email</th>
+                    
+                    <th class="py-3">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="table-light" id="usersTableBody">
+                </tbody>
+              </table>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="col-4 right-section">
+          <div class="row">
+
+
+
+            <div class="col-12  bg-white p-3    border border-secondary border-3 expandableDiv" style="height: 380px;" >
+              <div class="card   expandable-card" id="expandCard">
+                <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;"> <button class="fullViewButton btn" ><i class="fa fa-arrows-alt" aria-hidden="true"></i></button> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </button></div> -->
+               
+                <div class="card-body ">
+  
+              <div id="line_top_x" style="width: 100%; height: 300px;"></div>
+            </div>
+          </div>
+          </div>
+          </div>
+          
+
+          <div class="row mt-4">
+            
+            <div class="col-12  bg-white p-3    border border-secondary border-3 expandableDiv" style="height: 600px;" >
+              <div class="card   expandable-card" id="expandCard">
+                <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;"> <button class="fullViewButton btn" ><i class="fa fa-arrows-alt" aria-hidden="true"></i></button> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+                  <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </button></div> -->
+               
+                <div class="card-body " style="height: 560px;">
+                   <div class="card-title">consumed cost by <span class="text-primary">Day</span></div>
+                   <div id="chart-div"
+                   style="position:absolute;top:170px;left:-100px; transform: rotate(90deg); width: 500px; height: 250px;">
+                 </div>
+             
+            </div>
+          </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+     
+    </div>
+  </div>
+  <!-- Offcanvas Bottom  -->
+  <div class="offcanvas offcanvas-top" id="demo">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title">Heading</h1>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p>Some text lorem ipsum.</p>
+      <p>Some text lorem ipsum.</p>
+      <button class="btn btn-secondary" type="button">A Button</button>
+    </div>
+  </div>
+  <footer class="footer">
+    <h5 class="footer-content">&copy;All Rights Reserved Olive IOT</h5>
+  </footer>
+</body>
+<script src="search.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+       google.charts.load('current', { 'packages': ['bar'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      // Get current date and previous day of the week
+      var today = new Date();
+      var previousDayIndex = (today.getDay() - 1 + 7) % 7; // Adjust for Sunday (0)
+      var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+      var previousDayLabel = daysOfWeek[previousDayIndex];
+
+      // Random data for the previous day
+      var meter1PreviousDay = getRandomValue();
+      var meter2PreviousDay = getRandomValue();
+      var meter3PreviousDay = getRandomValue();
+
+      var data = google.visualization.arrayToDataTable([
+        ['Day', 'Meter 1', 'Meter 2', 'Meter 3'], 
+       
+        ['wed', 570, 460, 250],
+        ['thur', 560, 400, 300],
+        ['fri', 450, 540, 350],
+        ['sat', 450, 540, 350],
+        ['sun', 450, 540, 350],
+        ['Mon', 500, 400, 300],
+        [previousDayLabel, meter1PreviousDay, meter2PreviousDay, meter3PreviousDay]
+       
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Meter Overall Consumption',
+          subtitle: 'Meter 1, Meter 2, and Meter 3: Mon-Sun',
+        },
+        width: 700,
+        height: 500
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+
+    // Function to generate random value between 100 and 200
+    function getRandomValue() {
+      return Math.floor(Math.random() * 101) + 100;
+    }
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', { 'packages': ['line'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Day');
+      data.addColumn('number', ' R Voltage');
+      data.addColumn('number', 'Y Voltage');
+      data.addColumn('number', 'B Voltage');
+
+      // Initial data with random approximate values
+      var initialData = [
+        [1, getRandomValue(35, 40), getRandomValue(75, 85), getRandomValue(40, 45)],
+        [2, getRandomValue(28, 32), getRandomValue(65, 75), getRandomValue(30, 35)],
+        [3, getRandomValue(23, 27), getRandomValue(52, 62), getRandomValue(22, 28)],
+        [4, getRandomValue(10, 15), getRandomValue(17, 23), getRandomValue(8, 12)],
+        [5, getRandomValue(10, 15), getRandomValue(16, 22), getRandomValue(8, 12)],
+        [6, getRandomValue(8, 12), getRandomValue(12, 18), getRandomValue(7, 10)],
+        [7, getRandomValue(6, 10), getRandomValue(11, 15), getRandomValue(9, 13)],
+        [8, getRandomValue(11, 15), getRandomValue(27, 33), getRandomValue(10, 14)],
+        [9, getRandomValue(15, 20), getRandomValue(38, 45), getRandomValue(13, 17)],
+        [10, getRandomValue(12, 16), getRandomValue(28, 33), getRandomValue(11, 15)],
+        [11, getRandomValue(5, 8), getRandomValue(7, 11), getRandomValue(4, 6)],
+        [12, getRandomValue(6, 9), getRandomValue(8, 11), getRandomValue(5, 7)],
+        [13, getRandomValue(4, 7), getRandomValue(5, 8), getRandomValue(3, 5)],
+        [14, getRandomValue(3, 5), getRandomValue(5, 7), getRandomValue(3, 5)]
+      ];
+      data.addRows(initialData);
+
+      var options = {
+        chart: {
+          title: 'Three Phase energy',
+          subtitle: 'Incoming voltage'
+        },
+        width: 300,
+        height: 260,
+        colors: ["Red", "Blue", "Green"],
+        axes: {
+          x: {
+            0: { side: 'top' }
+          }
+        },
+        lineWidth: 10
+      };
+
+      var chart = new google.charts.Line(document.getElementById('line_top_x'));
+      chart.draw(data, google.charts.Line.convertOptions(options));
+
+      // Function to update random values for each data point every 10 seconds
+      
+     
+      
+
+      // Function to generate random value between min and max
+      function getRandomValue(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+    }setInterval(drawChart, 10000);
+
+</script>
+
+
+
+<script>
+google.charts.load("current", { packages: ["corechart"] });
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+  // Generate random production values for each meter
+  var meter1Production = Math.floor(Math.random() * 20) + 1; // Random value between 1 and 20
+  var meter2Production = Math.floor(Math.random() * 20) + 1;
+  var meter3Production = Math.floor(Math.random() * 20) + 1;
+
+  var data = google.visualization.arrayToDataTable([
+    ['Meter', 'Production'],
+    ['Meter 1', meter1Production],
+    ['Meter 2', meter2Production],
+    ['Meter 3', meter3Production]
+  ]);
+
+  var options = {
+    title: 'Production report',
+    is3D: true,
+    height: 250,
+    width: 380
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+  chart.draw(data, options);
+}
+
+// Schedule the chart update to happen daily
+setInterval(drawChart,10000); // Update every 24 hours
+
+
+</script>
+<script>
+  google.charts.load('upcoming', { 'packages': ['vegachart'] }).then(drawChart);
+
+
+function drawChart() {
+  const dataTable = new google.visualization.DataTable();
+  dataTable.addColumn({ type: 'string', 'id': 'category' });
+  dataTable.addColumn({ type: 'number', 'id': 'amount' });
+
+  // Initial random data
+  let dataRows = [
+    ['1', getRandomNumber()],
+    ['2', getRandomNumber()],
+    ['3', getRandomNumber()],
+    ['4', getRandomNumber()],
+    ['5', getRandomNumber()],
+    ['6', getRandomNumber()],
+    ['7', getRandomNumber()],
+    ['8', getRandomNumber()],
+    ['9', getRandomNumber()],
+  ];
+  dataTable.addRows(dataRows);
+
+  const options = {
+      "vega": {
+        "$schema": "https://vega.github.io/schema/vega/v4.json",
+        "width": 480,
+        "height": 200,
+        "padding": 5,
+
+
+        'data': [{ 'name': 'table', 'source': 'datatable' }],
+
+        "signals": [
+          {
+            "name": "tooltip",
+            "value": {},
+            "on": [
+              { "events": "rect:mouseover", "update": "datum" },
+              { "events": "rect:mouseout", "update": "{}" }
+            ]
+          }
+        ],
+
+        "scales": [
+          {
+            "name": "xscale",
+            "type": "band",
+            "domain": { "data": "table", "field": "category" },
+            "range": "width",
+            "padding": 0.05,
+            "round": true
+          },
+          {
+            "name": "yscale",
+            "domain": { "data": "table", "field": "amount" },
+            "nice": true,
+            "range": "height"
+          }
+        ],
+
+        "axes": [
+          { "orient": "bottom", "scale": "xscale" },
+          { "orient": "left", "scale": "yscale" }
+        ],
+
+        "marks": [
+          {
+            "type": "rect",
+            "from": { "data": "table" },
+            "encode": {
+              "enter": {
+                "x": { "scale": "xscale", "field": "category" },
+                "width": { "scale": "xscale", "band": 1 },
+                "y": { "scale": "yscale", "field": "amount" },
+                "y2": { "scale": "yscale", "value": 0 }
+              },
+              "update": {
+                "fill": { "value": "steelblue" }
+              },
+              "hover": {
+                "fill": { "value": "red" }
+              }
+            }
+          },
+          {
+            "type": "text",
+            "encode": {
+              "enter": {
+                "align": { "value": "center" },
+                "baseline": { "value": "bottom" },
+                "fill": { "value": "#333" }
+              },
+              "update": {
+                "x": { "scale": "xscale", "signal": "tooltip.category", "band": 0.5 },
+                "y": { "scale": "yscale", "signal": "tooltip.amount", "offset": -2 },
+                "text": { "signal": "tooltip.amount" },
+                "fillOpacity": [
+                  { "test": "datum === tooltip", "value": 0 },
+                  { "value": 1 }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    };
+
+
+  const chart = new google.visualization.VegaChart(document.getElementById('chart-div'));
+  chart.draw(dataTable, options);
+
+  // Update data every 10 seconds
+  setInterval(() => {
+    dataRows = [
+      ['1', getRandomNumber()],
+      ['2', getRandomNumber()],
+      ['3', getRandomNumber()],
+      ['4', getRandomNumber()],
+      ['5', getRandomNumber()],
+      ['6', getRandomNumber()],
+      ['7', getRandomNumber()],
+      ['8', getRandomNumber()],
+      ['9', getRandomNumber()],
+    ];
+    dataTable.removeRows(0, dataTable.getNumberOfRows());
+    dataTable.addRows(dataRows);
+    chart.draw(dataTable, options);
+  }, 10000); // 10 seconds in milliseconds
+}
+
+// Function to generate random number between 1 and 100
+function getRandomNumber() {
+  return Math.floor(Math.random() * 100) + 1;
+}
+</script>
+
+
+
+
+
+
+<script type="module">
+
+
+
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+  //  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  // import { getDatabase,ref,onValue} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"; 
+  // import { getDatabase, ref, onValue } from "./firebase/database";
+  import { getDatabase, ref, onChildAdded, orderByChild, onValue, remove } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+
+
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
+    authDomain: "three-phase-energy-meter.firebaseapp.com",
+    projectId: "three-phase-energy-meter",
+    storageBucket: "three-phase-energy-meter.appspot.com",
+    messagingSenderId: "643707481883",
+    appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
+    measurementId: "G-ZC6S4GQJD3"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getDatabase(app);
+  // const userId="OliveEnergy";
+
+
+  // function addProject(projectName) {
+  //     const projectsRef = ref(database, 'projects'); // Assuming 'projects' is the path in your database
+  //     push(projectsRef, {
+  //         name: projectName
+  //     });
+  // }
+
+
+
+
+
+  function addTableRow(sequenceNumber, userId) {
+
+    const userRef = ref(db, 'users/' + userId);
+    // const userRef =ref(db,`users/${userId}`); // Assuming 'users' is the path in your database
+    try {
+      onValue(userRef, (snapshot) => {
+        const user = snapshot.val();
+        if (user) {
+          const usersTableBody = document.getElementById('usersTableBody');
+          const row = document.createElement('tr');
+          const Project_Name = user.Project_Name;
+          row.innerHTML = `
+              <td>${sequenceNumber}</td>
+              <td>${user.Project_Name}</td>
+              <td>${user.Contact_email}</td>
+              
+              <td>
+                  <button class="btn btn-success px-4 py-1 ms-1 me-1" data-edit-name="${Project_Name}">Edit</button>
+  <button class="btn btn-primary px-2 py-1 ms-1 me-1" data-project-name="${Project_Name}">View</button>
+ 
+</td>  
+          `;
+          console.log(user.Project_Name)
+          usersTableBody.appendChild(row);
+        }
+      });
+    }
+    catch (e) {
+      console.log("Error to getting Database" + e);
+    }
+  }
+  let sequenceNumber = 1;
+  const userRef1 = ref(db, 'users');
+  // Call addTableRow for each user
+  onChildAdded(userRef1, (data) => {
+    const userId = data.key;
+    addTableRow(sequenceNumber++, userId);
+  });
+
+  function refreshPage() {
+    location.reload(); // Reload the page
+  }
+
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('btn-primary')) {
+      const projectName = event.target.getAttribute('data-project-name');
+      if (projectName) {
+        viewProject(projectName);
+      } else {
+        console.error('Project name not found.');
+      }
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('btn-success')) {
+      const projectName = event.target.getAttribute('data-edit-name');
+      if (projectName) {
+        editProject(projectName);
+      } else {
+        console.error('Project name not found.');
+      }
+    }
+  });
+
+  function editProject(projectName) {
+    window.location.href = `addCustomer.html?projectName=${encodeURIComponent(projectName)}`;
+
+  }
+  function viewProject(projectName) {
+    window.location.href = `dashboard.html?projectName=${encodeURIComponent(projectName)}`;
+
+  }
+
+ 
+
+
+    // Refresh table
+
+  
+
+    // Add click event listener to the Refresh button
+    document.getElementById('refresh').addEventListener('click', () => {
+        window.location.reload();
+    });
+
+
+</script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+  import { getAuth, signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+  const firebaseConfig1 = {
+      apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
+      authDomain: "three-phase-energy-meter.firebaseapp.com",
+      projectId: "three-phase-energy-meter",
+      storageBucket: "three-phase-energy-meter.appspot.com",
+      messagingSenderId: "643707481883",
+      appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
+      measurementId: "G-ZC6S4GQJD3"
+  };
+
+  // Initialize Firebase
+  const app1 = initializeApp(firebaseConfig1);
+  const analytics1 = getAnalytics(app1);
+  console.log(app1);
+  const auth = getAuth();
+
+  // Get logout icon and card elements
+const logoutIcon1 = document.getElementById('logoutIcon');
+const logoutCard3 = document.getElementById('logoutCard1');
+
+
+// Show the logout card when the logout icon is clicked
+logoutIcon1.addEventListener('click', () => {
+  if (logoutCard3.style.display === 'block') {
+    logoutCard3.style.display = 'none';
+  } else {
+    logoutCard3.style.display = 'block';
+  }
+});
+
+
+
+// Hide the logout card when the user clicks outside of it
+
+
+// Logout when the logout button is clicked
+document.getElementById('logOut').addEventListener('click', () => {
+  const confirmLogout = confirm('Are you sure you want to logout?');
+  if (confirmLogout) {
+    signOutUser(); // Call the signOut function from auth.js
+  }
+});
+function signOutUser() {
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    window.location.href = "index.html";
+  }).catch((error) => {
+    // An error happened.
+    console.error(error.message);
+  });
+}
+
+</script>
+<script>
+  function myFunction(){
+    const input = document.getElementById('search');
+      const filter = input.value.toUpperCase();
+      const table = document.getElementById('usersTable');
+      const rows = table.getElementsByTagName('tr');
+
+      for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip the header row
+        const cells = rows[i].getElementsByTagName('td');
+        let found = false;
+        for (let j = 0; j < cells.length; j++) {
+          const cellText = cells[j].innerText.toUpperCase();
+          if (cellText.includes(filter)) {
+            found = true;
+            break;
+          }
+        }
+        rows[i].style.display = found ? '' : 'none';
+      }
+  }
+</script>
+<script src="expand.js"></script>
+<script >
+  document.addEventListener('DOMContentLoaded', function () {
+    var expandableDivs = document.querySelectorAll('.expandableDiv');
+    var fullViewButtons = document.querySelectorAll('.fullViewButton');
+
+    fullViewButtons.forEach(function (button, index) {
+        button.addEventListener('click', function () {
+            expandDiv(expandableDivs[index]);
+        });
+    });
+
+    function expandDiv(div) {
+        if (!div.classList.contains('expanded')) {
+            div.classList.add('expanded');
+        } else {
+            div.classList.remove('expanded');
+        }
+    }
+});
+
+</script>
+<script src="scrollTop.js"></script>
+</html>

@@ -3,7 +3,8 @@ import json
 import random
 import time
 
-
+import datetime
+import time
 class EnergyMeterMQTTClient:
     def __init__(self, broker_address,port,topic):
         self.broker_address = broker_address
@@ -35,25 +36,26 @@ class EnergyMeterMQTTClient:
             status_code, _ = self.client.publish(self.topic, json.dumps(random_values))
             print("Published with status code:", status_code)
             print("Data sent:", random_values)
-            time.sleep(2)
-
+            time.sleep(10)
+     
+   
     def generate_random_values(self):
-        pv01 = round(random.uniform(0.85, 0.95), 2)
-        pv02 = round(random.uniform(1500, 1700), 2)
-        pv03 = round(random.uniform(49.5, 50.5), 2)
-        pv04 = round(random.uniform(390, 410), 2)
-        pv05 = round(random.uniform(225, 235), 2)
-        pv06 = round(random.uniform(390, 410), 2)
-        pv07 = round(random.uniform(390, 410), 2)
-        pv08 = round(random.uniform(390, 410), 2)
-        pv09 = round(random.uniform(7.5, 8.5), 2)
-        pv10 = round(random.uniform(700, 800), 2)
-        pv11 = round(random.uniform(150, 175), 2)
-        pv12 = round(random.uniform(150, 175), 2)
-        pv13 = round(random.uniform(150, 175), 2)
-        pv14 = round(random.uniform(700, 800), 2)
+        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        pv01 = round(random.uniform(200, 250), 2)
+        pv02 = round(random.uniform(240, 280), 2)
+        pv03 = round(random.uniform(200, 300), 2)
+        pv04 = round(random.uniform(210, 220), 2)
+        pv05 = round(random.uniform(225, 245), 2)
+        pv06 = round(random.uniform(220, 270), 2)
+        pv07 = round(random.uniform(270, 300), 2)
+        pv08 = round(random.uniform(260, 290), 2)
+        pv09 = round(random.uniform(230, 267), 2)
+        pv10 = 1
+       
 
         return {
+
+            "timestamp":timestamp,
             "PV01": pv01,
             "PV02": pv02,
             "PV03": pv03,
@@ -64,19 +66,14 @@ class EnergyMeterMQTTClient:
             "PV08": pv08,
             "PV09": pv09,
             "PV10": pv10,
-            "PV11": pv11,
-            "PV12": pv12,   
-            "PV13": pv13,
-            "PV14": pv14
+           
         }
 
 
 if __name__ == "__main__":
     broker_address = "mqtt-dashboard.com"
     port =1883
-    #username = "energymeter"
-    #password = "energy@123"
-    topic = "testtopic/143"
+    topic = "testtopic/470"
     #client_id="clientId-JZnMXefu2U"
 
     mqtt_client = EnergyMeterMQTTClient(broker_address,port,topic)

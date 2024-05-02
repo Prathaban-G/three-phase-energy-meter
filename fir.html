@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication Example</title>
+</head>
+<body>
+  <!-- Your HTML content for login, admin, and user pages -->
+  <h1>Welcome</h1>
+  <button onclick="signIn()">Sign In</button>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth.js"></script>
+
+  <!-- Your Firebase config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
+        authDomain: "three-phase-energy-meter.firebaseapp.com",
+        projectId: "three-phase-energy-meter",
+        storageBucket: "three-phase-energy-meter.appspot.com",
+        messagingSenderId: "643707481883",
+        appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
+        measurementId: "G-ZC6S4GQJD3"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- Firebase Auth script -->
+  <script src="auth.js"></script>
+</body>
+</html>

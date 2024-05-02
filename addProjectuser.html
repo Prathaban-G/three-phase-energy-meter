@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olive Energy Meter</title><link rel="icon" type="image/png" href="logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+       
+    <script src="search.js"></script>
+    <script src="desktop.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            line-height: 2px;
+            letter-spacing: 1px;
+
+        }
+
+        body {
+            background-color: rgb(227, 229, 231);
+            padding: 20px;
+        }
+
+        .breadcrumb-item a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+        .alert-message
+        {
+            position:absolute;
+            top:100px;
+            right:50px;
+        }
+        .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0; /* Make sure the footer spans the full width */
+    width: 100%; /* Ensure the footer spans the full width */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically */
+    background-color: #333; /* Just for visualization */
+    color: white; /* Just for visualization */
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid main">
+        <div class="container-fluid nav-section mb-5">
+            <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+                    </a>
+                    <h5 class="nav-title text-muted mt-2">Olive Energy Meter</h5>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse " id="mynavbar">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item ">
+                                <a class="nav-link " href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="addProjects.html">Project </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="addUser.html">User </a>
+                            </li>
+                        </ul>
+                        <form class="d-flex">
+                            <input class="form-control me-2" type="text" placeholder="Search">
+                            <button class="btn btn-primary me-5 " style="right: 100px !important;"
+                                type="button">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+
+
+        </div>
+
+        <div class="container-fluid">
+            <div class="row pt-2 ">
+                <nav aria-label="breadcrumb ">
+
+                    <ol class="breadcrumb mt-2  ">
+                        <li class="breadcrumb-item"><a href="home.html"><i class="fa fa-home "></i></a></li>
+                        <li class="breadcrumb-item pt-2"><a href="addUser.html">User Management</a></li>
+                        
+                        <li class="breadcrumb-item active pt-2 active" aria-current="page"><a href="addProjectuser.html">Add User</a>
+                        </li>
+                        <div class="container-fluid d-flex justify-content-end">
+                            <button class="btn btn-primary float-end ms-2 py-1 px-3"><a href="addUser.html" style="  color: inherit;
+                                text-decoration: inherit;"><i class="fa fa-reply pe-2"
+                                aria-hidden="true"></i> back</a></button>
+                        </div>
+
+                    </ol>
+                </nav>
+
+            </div>
+
+        </div>
+
+        <div class="container   border-top border-primary px-5 py-4" style="background-color: lightgrey;">
+
+            <form>
+                <div class="row px-5 py-1">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">Project Name</h4>
+                            </div>
+
+                            <div class="col-8">
+                                <input type="text" class="form-control " placeholder="Enter Project Name" id="proname"
+                                    name="pname">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">Address </h4>
+                            </div>
+
+                            <div class="col-8">
+                                <input type="text" class="form-control" placeholder="Enter Address " id="caddress"
+                                    name="address">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row px-5 py-1">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">User Name</h4>
+                            </div>
+
+                            <div class="col-8">
+                                <input type="text" class="form-control" placeholder="Enter User Name" id="ccname"
+                                    name="ccname">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">City</h4>
+                            </div>
+
+                            <div class="col-8">
+                                <input type="text" class="form-control" placeholder="Enter City" id="ccity"
+                                    name="ccity">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row px-5 py-1">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">Email Id</h4>
+                            </div>
+
+                            <div class="col-8">
+                                <input type="email" id="cemail" class="form-control" placeholder="Enter email"
+                                    name="email">
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">Zip code</h4>
+                            </div>
+
+                            <div class="col-8">
+                                <input type="number" class="form-control" id="czipcode" placeholder="Enter Zip Code"
+                                    name="czipcode">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row px-5 py-1">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">Password</h4>
+                            </div>
+
+                            <div class="col-8">
+                                <input type="text" class="form-control" id="cpname" placeholder="Enter  Password"
+                                    name="cpname">
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">State </h4>
+                            </div>
+
+                            <div class="col-8">
+                                <!--- India states -->
+                                <select id="cstate" name="country-state" class="form-select">
+                                    <option value="">Select state</option>
+                                    <option value="AN">Andaman and Nicobar Islands</option>
+                                    <option value="AP">Andhra Pradesh</option>
+                                    <option value="AR">Arunachal Pradesh</option>
+                                    <option value="AS">Assam</option>
+                                    <option value="BR">Bihar</option>
+                                    <option value="CH">Chandigarh</option>
+                                    <option value="CT">Chhattisgarh</option>
+                                    <option value="DN">Dadra and Nagar Haveli</option>
+                                    <option value="DD">Daman and Diu</option>
+                                    <option value="DL">Delhi</option>
+                                    <option value="GA">Goa</option>
+                                    <option value="GJ">Gujarat</option>
+                                    <option value="HR">Haryana</option>
+                                    <option value="HP">Himachal Pradesh</option>
+                                    <option value="JK">Jammu and Kashmir</option>
+                                    <option value="JH">Jharkhand</option>
+                                    <option value="KA">Karnataka</option>
+                                    <option value="KL">Kerala</option>
+                                    <option value="LA">Ladakh</option>
+                                    <option value="LD">Lakshadweep</option>
+                                    <option value="MP">Madhya Pradesh</option>
+                                    <option value="MH">Maharashtra</option>
+                                    <option value="MN">Manipur</option>
+                                    <option value="ML">Meghalaya</option>
+                                    <option value="MZ">Mizoram</option>
+                                    <option value="NL">Nagaland</option>
+                                    <option value="OR">Odisha</option>
+                                    <option value="PY">Puducherry</option>
+                                    <option value="PB">Punjab</option>
+                                    <option value="RJ">Rajasthan</option>
+                                    <option value="SK">Sikkim</option>
+                                    <option value="TN">Tamil Nadu</option>
+                                    <option value="TG">Telangana</option>
+                                    <option value="TR">Tripura</option>
+                                    <option value="UP">Uttar Pradesh</option>
+                                    <option value="UT">Uttarakhand</option>
+                                    <option value="WB">West Bengal</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row px-5 py-1">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">Mobile No </h4>
+                            </div>
+
+                            <div class="col-8">
+                                <input type="number" class="form-control" id="cmobile" placeholder="Enter Mobile Number"
+                                    name="cmobile">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-start text-dark p-2">Add Info</h4>
+                            </div>
+
+                            <div class="col-8">
+                                <textarea class="form-control " rows="5" id="ccomment" name="text"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="d-flex justify-content-center">
+                <button class=" btn btn-primary text-white px-3 py-1" id="save"><i class="fa fa-check me-2"
+                        aria-hidden="true"></i> Save</button>
+                <button class=" btn btn-secondary text-white ms-5 px-3 py-1" id="clearInput"><i class="fa fa-times me-2"
+                        aria-hidden="true"></i>Clear</button>
+
+            </div>
+
+        </div>
+        <footer class="footer"><h5 class="footer-content">&copy;All Rights Reserved Olive IOT</h5></footer>
+</body>
+<script type="module">
+
+
+
+
+
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+    //  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getDatabase, ref, set , child, get} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+    const firebaseConfig = {
+
+        apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
+        authDomain: "three-phase-energy-meter.firebaseapp.com",
+        projectId: "three-phase-energy-meter",
+        storageBucket: "three-phase-energy-meter.appspot.com",
+        messagingSenderId: "643707481883",
+        appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
+        measurementId: "G-ZC6S4GQJD3"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    // const db = getFirestore(app);
+    var db = getDatabase(app);
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const projectName = urlParams.get('projectName');
+
+
+//     // Fill the Input Fields
+//     function getProjectData(projectName) {
+//     const projectRef1 = ref(db, `users/${projectName}`);
+//     get(projectRef1)
+//         .then((snapshot) => {
+//             if (snapshot.exists()) {
+//                 const projectData = snapshot.val();
+              
+
+
+//         document.getElementById("proname").value = projectData.Project_Name;
+//         document.getElementById("caddress").value = projectData.Project_Address;
+//         document.getElementById("ccname").value = projectData.Company_Name;
+//         document.getElementById("ccity").value = projectData.Company_city;
+//         document.getElementById("cpname").value = projectData.Contact_person;
+//         document.getElementById("czipcode").value = projectData.Zipcode;
+//         document.getElementById("cemail").value = projectData.Contact_email;
+//         document.getElementById("cstate").value = projectData.state;
+//         document.getElementById("cmobile").value = projectData.Mobile_Number;
+//         document.getElementById("ccomment").value = projectData.Project_information;
+//             } else {
+//                 console.error('Project data not found.');
+//             }
+//         })
+//         .catch((error) => {
+//             console.error('Error getting project data:', error);
+//         });
+// }
+
+// Call getProjectData when the page loads to fill input fields with project data
+//document.addEventListener('DOMContentLoaded', () => {
+    //getProjectData(projectName);
+//});
+
+
+
+
+
+    //document.getElementById('save').addEventListener('click',  async function (event)  {
+//     event.preventDefault(); // Prevent form submission
+    
+//     var proname = document.getElementById("proname").value;
+//         var proaddress = document.getElementById("caddress").value;
+//         var ccname = document.getElementById("ccname").value;
+//         var ccity = document.getElementById("ccity").value;
+//         var cpname = document.getElementById("cpname").value;
+//         var czipcode = document.getElementById("czipcode").value;
+//         var cemail = document.getElementById("cemail").value;
+//         var cstate = document.getElementById("cstate").value;
+//         var cmobile = document.getElementById("cmobile").value;
+//         var ccomment = document.getElementById("ccomment").value;
+
+//     // Update the project name in the database
+//     const projectRef = ref(db, `users/${projectName}`);
+//    await set(projectRef, {   Project_Name: proname,
+//                 Project_Address: proaddress,
+//                 Company_Name: ccname,
+//                 Company_city: ccity,
+//                 Contact_person: cpname,
+//                 Zipcode: czipcode,
+//                 Contact_email: cemail,
+//                 state: cstate,
+//                 Mobile_Number: cmobile,
+//                 Project_information: ccomment })
+//         .then(() => {
+//             alert('Project updated successfully!');
+//             window.location.href = 'addProjects.html'; // Redirect to the main page after update
+//         })
+//         .catch((error) => {
+//             console.error('Error updating project:', error);
+//         });
+// });
+
+    // Save the data to firebase
+
+    document.getElementById("save").addEventListener("click", async function () {
+
+        // Get All Details
+        var proname = document.getElementById("proname").value;
+        var proaddress = document.getElementById("caddress").value;
+        var ccname = document.getElementById("ccname").value;
+        var ccity = document.getElementById("ccity").value;
+        var cpname = document.getElementById("cpname").value;
+        var czipcode = document.getElementById("czipcode").value;
+        var cemail = document.getElementById("cemail").value;
+        var cstate = document.getElementById("cstate").value;
+        var cmobile = document.getElementById("cmobile").value;
+        var ccomment = document.getElementById("ccomment").value;
+
+
+
+
+        console.log(proname);
+
+        try {
+            await set(ref(db, 'projectUsers/' + proname), {
+                Project_Name: proname,
+                Project_Address: proaddress,
+                User_Name: ccname,
+                Company_city: ccity,
+                
+                Zipcode: czipcode,
+                Contact_email: cemail,
+                Password: cpname,
+                state: cstate,
+                Mobile_Number: cmobile,
+                Project_information: ccomment
+
+
+            });
+            addUserAuth();
+            addUserDatabase();
+            const alertMessage = document.createElement('div');
+            alertMessage.classList.add('alert', 'alert-success',  'alert-message');
+            alertMessage.textContent = 'Successfully Added !';
+            document.body.appendChild(alertMessage);
+
+            setTimeout(() => {
+                alertMessage.remove(); // Remove the alert after 6 seconds
+                location.reload(); // Reload the page
+            }, 3000);
+            console.log("Document written with ID: ", ref.id);
+
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    });
+   
+    document.getElementById('clearInput').addEventListener('click',()=>{
+        document.getElementById("proname").value = "";
+        document.getElementById("caddress").value = "";
+        document.getElementById("ccname").value = "";
+        document.getElementById("ccity").value = "";
+        document.getElementById("cpname").value = "";
+        document.getElementById("czipcode").value = "";
+        document.getElementById("cemail").value = "";
+        document.getElementById("cstate").value = "";
+        document.getElementById("cmobile").value = "";
+        document.getElementById("ccomment").value = "";
+
+    }
+    )
+       
+
+    // Assuming you have already initialized Firebase in your project
+function addUserAuth(){
+    const auth = getAuth();
+
+var email = document.getElementById("cemail").value;
+var password = document.getElementById("cpname").value;
+console.log(email+password);
+
+  createUserWithEmailAndPassword(auth,email, password)
+    .then((userCredential) => {
+        // User registered successfully
+        const user = userCredential.user;
+        console.log('User registered:', user.uid);
+    })
+    .catch((error) => {
+        // Handle registration errors
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Registration error:', errorCode, errorMessage);
+    });
+}
+function addUserDatabase(){
+    var proname = document.getElementById("proname").value;
+var cemail = document.getElementById("cemail").value; 
+
+try {
+    var proname = document.getElementById("proname").value;
+var cemail = document.getElementById("cemail").value; 
+    // Assuming db is your Firestore database instance
+    var parts = cemail.split("@");
+    var username = parts[0];
+   
+    try {
+             set(ref(db, 'UserDatabase/' + username), {
+                pro_name: proname,
+                Pro_email: cemail
+                
+
+
+            });}
+            catch(e){
+                console.log(e);
+            }
+
+  
+
+} catch(e) {
+    console.log("Error in adding element: " + e);
+}
+}
+</script>
+
+</html>
