@@ -139,9 +139,10 @@
                     <thead>
                         <tr>
                             <th class="py-3">No</th>
+                            <th class="py-3">Project Name </th>
                             <th class="py-3">User Name </th>
                             <th class="py-3">Email</th>
-                            <th class="py-3">project</th>
+                            
                             <th class="py-3">Action</th>
                         </tr>
                     </thead>
@@ -211,8 +212,9 @@ const db = getDatabase(app);
             row.innerHTML = `
                 <td>${sequenceNumber}</td>
                 <td>${user.Project_Name}</td>
+                <td>${user.User_Name}</td>
                 <td>${user.Contact_email}</td>
-                <td>${user.state}</td>
+              
                 <td>
                     <button class="btn btn-success px-4 py-1 ms-1 me-1" data-edit-name="${Project_Name}">Edit</button>
     <button class="btn btn-danger px-2 py-1 ms-1 me-1" data-project-name="${Project_Name}">Delete</button>
