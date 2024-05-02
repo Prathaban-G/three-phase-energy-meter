@@ -307,7 +307,7 @@
 
 
                     document.getElementById("proname").value = projectData.Project_Name;
-
+                   
                 } else {
                     console.error('Project data not found.');
                 }
@@ -316,10 +316,42 @@
                 console.error('Error getting project data:', error);
             });
     }
+    function getMachineData(projectName) {
+        const projectRef1 = ref(db, `users/${projectName}/Machine`);
+        get(projectRef1)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const projectData = snapshot.val();
+
+
+
+                    document.getElementById("proname").value = projectData.Project_Name;
+                    document.getElementById("clocation").value = projectData.Machine_Location;
+                    document.getElementById("ccname").value = projectData.client_Name;
+                    document.getElementById("ccity").value = projectData.Machine_city;
+                    document.getElementById("cserial").value = projectData.MQTT_Topic;
+                    document.getElementById("cmodel").value = projectData.Model;
+                    document.getElementById("ctemplate").value = projectData.Template_Type;
+                    document.getElementById("cinfo").value = projectData.Information;
+                    
+                   
+                } else {
+                    console.error('Project data not found.');
+                    getProjectData(projectName)
+                }
+            })
+            .catch((error) => {
+                console.error('Error getting project data:', error);
+            });
+    }
+
+
+    
+
 
     // Call getProjectData when the page loads to fill input fields with project data
     document.addEventListener('DOMContentLoaded', () => {
-        getProjectData(projectName);
+        getMachineData(projectName);
     });
 
 
