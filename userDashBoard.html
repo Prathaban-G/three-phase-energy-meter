@@ -178,7 +178,7 @@
 
 
             </div>
-            <div class="row px-5 mt-3">  
+            <!-- <div class="row px-5 mt-3">  
 
                 <div class="col-lg-12 col-sm-12  px-1 w3-animate-zoom">
                     <div class="bg-white p-3    border border-light border-3">
@@ -193,7 +193,7 @@
                         </div>
                     </div>
                
-        </div></div>
+        </div></div> -->
             <!-- <div class="alert mt-3 alert-info float-end" style="position:absolute;top: 60px;right: 10px; ">Updated Every <strong>6 </strong>s  once -->
 
 
@@ -367,15 +367,11 @@ window.onclick = function(event) {
   </script>
    -->
 <script type="module">
-
-
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
-    //  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-    import { getDatabase, ref, set, child, get, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    import { getDatabase, ref, get, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
     const firebaseConfig = {
-
         apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
         authDomain: "three-phase-energy-meter.firebaseapp.com",
         projectId: "three-phase-energy-meter",
@@ -384,6 +380,7 @@ window.onclick = function(event) {
         appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
         measurementId: "G-ZC6S4GQJD3"
     };
+
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const database = getDatabase(app);
@@ -391,34 +388,50 @@ window.onclick = function(event) {
     const projectName = urlParams.get('projectName');
     console.log(projectName);
 
-    document.getElementById('dashBoardPage').innerHTML = projectName;
-   document.getElementById('backhome').addEventListener('click',()=>{ backLink.href = `userHome.html?projectName=${encodeURIComponent(projectName)}`;})
+    function getProjectData(projectName) {
+        const projectRef1 = ref(database, `UserDatabase/${projectName}`);
+        get(projectRef1)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const projectData = snapshot.val();
+                    window.proname = projectData.pro_name;
+                    console.log(window.proname);
+                    document.getElementById('dashBoardPage').innerHTML = window.proname;
+                } else {
+                    console.error('Project data not found.');
+                }
+            })
+            .catch((error) => {
+                console.error('Error getting project data:', error);
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getProjectData(projectName);
+        setTimeout(() => {
+            getProjectData2(window.proname);
+        }, 1000);
+    });
 
    
-    // Fill the Input Fields
-    function getProjectData(projectName) {
-        const projectRef12 = ref(database, `mqttData/${projectName}/data`);
+    document.getElementById('backhome').addEventListener('click', () => {
+        window.location.href = `userHome.html?projectName=${encodeURIComponent(projectName)}`;
+    });
+
+    function getProjectData2(proname) {
+        const projectRef12 = ref(database, `mqttData/${proname}/data`);
         onValue(projectRef12, (snapshot) => {
             if (snapshot.exists()) {
                 const projectData = snapshot.val();
-                // Update the page data here based on projectData
-
-                var dataString = snapshot.val(); // Get the data as a string
-
-                // Parse the string into a JavaScript object
+                var dataString = snapshot.val();
                 var dataObject = null;
                 try {
                     dataObject = JSON.parse(dataString);
                 } catch (e) {
                     console.error("Error parsing JSON:", e);
-                    return; // Exit the function if parsing fails
+                    return;
                 }
 
-                // var updateTime = new Date().toLocaleString();
-                // console.log("Document element updated at:", updateTime);
-               
-
-                // Check if dataObject is not null or undefined before accessing its properties
                 if (dataObject && typeof dataObject === 'object') {
                     var Timestamp = dataObject.timestamp;
                     var PV01 = dataObject.PV01;
@@ -432,23 +445,8 @@ window.onclick = function(event) {
                     var PV09 = dataObject.PV09;
                     var PV10 = dataObject.PV10;
                     document.getElementById("time").innerHTML = 'Last Updated  : ' + Timestamp;
-                   
 
-                    // Repeat this for all the fields you want to access
-
-                    //   console.log("PV01:", PV01);
-                    //   console.log("PV02:", PV02);
-                    //   console.log("PV03:", PV03);
-                    //   console.log("PV04:", PV04);
-                    //   console.log("PV05:", PV05);
-                    //   console.log("PV06:", PV06);
-                    //   console.log("PV07:", PV07);
-                    //   console.log("PV08:", PV08);
-                    //   console.log("PV09:", PV09);
-                    //  
-                    //  console.log("PV10:", PV10);
                     window.myGlobalVariable1 = PV01;
-
                     window.myGlobalVariable2 = PV02;
                     window.myGlobalVariable3 = PV03;
                     window.myGlobalVariable4 = PV04;
@@ -461,53 +459,27 @@ window.onclick = function(event) {
                     console.log(window.myGlobalVariable10);
                     const statusIcon = document.getElementById('deviceStatus');
 
-
-                    // Set the class based on the status value
                     if (window.myGlobalVariable10 === 1) {
                         statusIcon.classList.add('text-success');
-
                     } else {
                         statusIcon.classList.add('text-danger');
                     }
                 }
-                // reloadPage();
-            }
-            else {
+            } else {
                 console.error('Project data not found.');
             }
-        })
-            .catch((error) => {
-                console.error('Error getting project data:', error);
-            });
+        }, (error) => {
+            console.error('Error getting project data:', error);
+        });
     }
-
-    // Call getProjectData when the page loads to fill input fields with project data
-    document.addEventListener('DOMContentLoaded', () => {
-        getProjectData(projectName);
-
-
-
-    });
-
-    function reloadPage() {
-        location.reload();
-    }
-
-    // Initialize Firebase
-
-
-
-
 
     google.charts.load('current', { 'packages': ['gauge'] });
     google.charts.setOnLoadCallback(drawChart1);
 
     function drawChart1() {
-
         var data1 = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['R-V', 220],
-
         ]);
 
         var options1 = {
@@ -525,22 +497,18 @@ window.onclick = function(event) {
 
         setInterval(function () {
             const val = Math.ceil(window.myGlobalVariable1);
-
             data1.setValue(0, 1, val);
             chart1.draw(data1, options1);
         }, 4000);
-
     }
 
     google.charts.load('current', { 'packages': ['gauge'] });
     google.charts.setOnLoadCallback(drawChart2);
 
     function drawChart2() {
-
         var data2 = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['Y-V', 245],
-
         ]);
 
         var options2 = {
@@ -560,17 +528,15 @@ window.onclick = function(event) {
             data2.setValue(0, 1, Math.ceil(window.myGlobalVariable2));
             chart2.draw(data2, options2);
         }, 6000);
-
     }
+
     google.charts.load('current', { 'packages': ['gauge'] });
     google.charts.setOnLoadCallback(drawChart3);
 
     function drawChart3() {
-
         var data3 = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['B-V', 240],
-
         ]);
 
         var options3 = {
@@ -590,18 +556,15 @@ window.onclick = function(event) {
             data3.setValue(0, 1, Math.ceil(window.myGlobalVariable3));
             chart3.draw(data3, options3);
         }, 6000);
-
     }
-    // Second row
+
     google.charts.load('current', { 'packages': ['gauge'] });
     google.charts.setOnLoadCallback(drawChart4);
 
     function drawChart4() {
-
         var data4 = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['R-C', 278],
-
         ]);
 
         var options4 = {
@@ -621,18 +584,15 @@ window.onclick = function(event) {
             data4.setValue(0, 1, Math.ceil(window.myGlobalVariable4));
             chart4.draw(data4, options4);
         }, 6000);
-
     }
 
     google.charts.load('current', { 'packages': ['gauge'] });
     google.charts.setOnLoadCallback(drawChart5);
 
     function drawChart5() {
-
         var data5 = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['Y-C', 270],
-
         ]);
 
         var options5 = {
@@ -652,19 +612,15 @@ window.onclick = function(event) {
             data5.setValue(0, 1, Math.ceil(window.myGlobalVariable5));
             chart5.draw(data5, options5);
         }, 6000);
-
     }
-
 
     google.charts.load('current', { 'packages': ['gauge'] });
     google.charts.setOnLoadCallback(drawChart6);
 
     function drawChart6() {
-
         var data6 = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['B-C', 260],
-
         ]);
 
         var options6 = {
@@ -684,18 +640,15 @@ window.onclick = function(event) {
             data6.setValue(0, 1, Math.ceil(window.myGlobalVariable6));
             chart6.draw(data6, options6);
         }, 6000);
-
     }
-    // Third Row
+
     google.charts.load('current', { 'packages': ['gauge'] });
     google.charts.setOnLoadCallback(drawChart7);
 
     function drawChart7() {
-
         var data7 = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['RY-V', 280],
-
         ]);
 
         var options7 = {
@@ -715,17 +668,15 @@ window.onclick = function(event) {
             data7.setValue(0, 1, Math.ceil(window.myGlobalVariable7));
             chart7.draw(data7, options7);
         }, 6000);
-
     }
+
     google.charts.load('current', { 'packages': ['gauge'] });
     google.charts.setOnLoadCallback(drawChart8);
 
     function drawChart8() {
-
         var data8 = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['YB-V', 270],
-
         ]);
 
         var options8 = {
@@ -745,18 +696,15 @@ window.onclick = function(event) {
             data8.setValue(0, 1, Math.ceil(window.myGlobalVariable8));
             chart8.draw(data8, options8);
         }, 6000);
-
     }
 
     google.charts.load('current', { 'packages': ['gauge'] });
     google.charts.setOnLoadCallback(drawChart9);
 
     function drawChart9() {
-
         var data9 = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
             ['RB-V', 280],
-
         ]);
 
         var options9 = {
@@ -776,11 +724,8 @@ window.onclick = function(event) {
             data9.setValue(0, 1, Math.ceil(window.myGlobalVariable9));
             chart9.draw(data9, options9);
         }, 6000);
-
     }
-
 </script>
-
 
 
 <script type="module">

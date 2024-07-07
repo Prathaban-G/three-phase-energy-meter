@@ -594,39 +594,15 @@ function signOutUser() {
     // const db = getFirestore(app);
     var db = getDatabase(app);
     const urlParams = new URLSearchParams(window.location.search);
-    const projectName = urlParams.get('projectName');
+     window.projectName = urlParams.get('projectName');
     console.log(projectName)
 
 
-    // Fill the Input Fields
-    function getProjectData(projectName) {
-    const projectRef1 = ref(db, `UserDatabase/${projectName}`);
-    get(projectRef1)
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const projectData = snapshot.val();
-              
-
-
-                window.ProjectName=projectData.pro_name;
-                console.log(window.ProjectName);
-            } else {
-                console.error('Project data not found.');
-            }
-        })
-        .catch((error) => {
-            console.error('Error getting project data:', error);
-        });
-}
-
-// Call getProjectData when the page loads to fill input fields with project data
-document.addEventListener('DOMContentLoaded', () => {
-    getProjectData(projectName);
-});
+  
 document.getElementById("dashBoard").addEventListener('click',()=>{
-    var pro_name=window.ProjectName;
-    console.log(pro_name);
-    window.location.href = `userDashBoard.html?projectName=${encodeURIComponent(pro_name)}`;
+   
+    // console.log(pro_name);
+    window.location.href = `userDashBoard.html?projectName=${encodeURIComponent(window.projectName)}`;
 
 
 
