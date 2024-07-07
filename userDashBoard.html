@@ -135,7 +135,22 @@
 
 
             </div>
+            <div class="row px-5 mt-3">  
 
+                <div class="col-lg-12 col-sm-12  px-1 w3-animate-zoom">
+                    <div class="bg-white p-3    border border-light border-3">
+                        <div class="card   " >
+        
+                            <div class="card-body " style="height: 370px;">
+        
+        
+                                <div id="chartonline"></div>
+        
+                            </div>
+                        </div>
+                    </div>
+               
+        </div></div>
             <!-- <div class="alert mt-3 alert-info float-end" style="position:absolute;top: 60px;right: 10px; ">Updated Every <strong>6 </strong>s  once -->
 
 
@@ -770,5 +785,106 @@
 </script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script type="text/javascript">
+    var datesR = [
+      { x: new Date('2023-01-01').getTime(), y: 1000000 },
+      { x: new Date('2023-02-01').getTime(), y: 2000000 },
+      { x: new Date('2023-03-01').getTime(), y: 1500000 },
+      { x: new Date('2023-04-01').getTime(), y: 2500000 },
+      { x: new Date('2023-05-01').getTime(), y: 3000000 }
+    ];
+    
+    var datesY = [
+      { x: new Date('2023-01-01').getTime(), y: 1100000 },
+      { x: new Date('2023-02-01').getTime(), y: 2100000 },
+      { x: new Date('2023-03-01').getTime(), y: 1600000 },
+      { x: new Date('2023-04-01').getTime(), y: 2600000 },
+      { x: new Date('2023-05-01').getTime(), y: 3100000 }
+    ];
+    
+    var datesB = [
+      { x: new Date('2023-01-01').getTime(), y: 1200000 },
+      { x: new Date('2023-02-01').getTime(), y: 2200000 },
+      { x: new Date('2023-03-01').getTime(), y: 1700000 },
+      { x: new Date('2023-04-01').getTime(), y: 2700000 },
+      { x: new Date('2023-05-01').getTime(), y: 3200000 }
+    ];
+  
+    var options = {
+      series: [
+        {
+          name: 'R Phase',
+          data: datesR
+        },
+        {
+          name: 'Y Phase',
+          data: datesY
+        },
+        {
+          name: 'B Phase',
+          data: datesB
+        }
+      ],
+      chart: {
+        type: 'area',
+        stacked: false,
+        height: 350,
+        zoom: {
+          type: 'x',
+          enabled: true,
+          autoScaleYaxis: true
+        },
+        toolbar: {
+          autoSelected: 'zoom'
+        }
+      },
+      colors: [ '#0000FF', '#FFFF00','#FF0000'], // Blue, Yellow, Red
+      dataLabels: {
+        enabled: false
+      },
+      markers: {
+        size: 0,
+      },
+      title: {
+        text: 'Three Phase Voltage Monitoring',
+        align: 'left'
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shadeIntensity: 1,
+          inverseColors: false,
+          opacityFrom: 0.5,
+          opacityTo: 0,
+          stops: [0, 90, 100]
+        },
+      },
+      yaxis: {
+        labels: {
+          formatter: function (val) {
+            return (val / 1000000).toFixed(0);
+          },
+        },
+        title: {
+          text: 'Voltage (in millions)'
+        },
+      },
+      xaxis: {
+        type: 'datetime',
+      },
+      tooltip: {
+        shared: true,
+        y: {
+          formatter: function (val) {
+            return (val / 1000000).toFixed(0);
+          }
+        }
+      }
+    };
+  
+    var chart = new ApexCharts(document.querySelector("#chartonline"), options);
+    chart.render();
+  </script>
 
 </html>
