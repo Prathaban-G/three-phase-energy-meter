@@ -40,6 +40,14 @@
             background-color: rgb(204, 207, 211);
 
         }
+        .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .nav-item {
+    padding: 0px 30px;
+  }
 
         .breadcrumb-item a {
             color: inherit;
@@ -54,7 +62,7 @@
 
     <div class="container-fluid main">
         <div class="container-fluid nav-section mb-5 block">
-            <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
+            <nav class="navbar navbar-expand-sm  fixed-top bg-info">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
@@ -101,8 +109,7 @@
                         </div>
                         <div class="container-fluid d-flex justify-content-end">
 
-                            <button class="btn btn-primary float-end ms-2 py-1 px-3"><a href="home.html" style="  color: inherit;
-                            text-decoration: inherit;"><i class="fa fa-reply pe-2" aria-hidden="true"></i>
+                            <button class="btn btn-primary float-end ms-2 py-1 px-3" id="backhome"><i class="fa fa-reply pe-2" aria-hidden="true"></i>
                                     back</a></button>
                         </div>
 
@@ -290,6 +297,9 @@
     console.log(projectName);
 
     document.getElementById('dashBoardPage').innerHTML = projectName;
+   document.getElementById('backhome').addEventListener('click',()=>{ backLink.href = `userHome.html?projectName=${encodeURIComponent(projectName)}`;})
+
+   
     // Fill the Input Fields
     function getProjectData(projectName) {
         const projectRef12 = ref(database, `mqttData/${projectName}/data`);

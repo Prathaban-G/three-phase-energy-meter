@@ -9,6 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
@@ -26,6 +27,7 @@
          
             transition: all 0.5s ease;
         }
+       
         .expanded {
           position: fixed;
             top: 100px;
@@ -65,7 +67,19 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       z-index: 1000; /* Ensure the card appears above other elements */
     }
-    
+    .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+font-size: 20px;
+  }
+  .nav-item {
+    padding: 0px 30px;
+    transition:all  .4s ease-in-out;
+  }
+  .nav-item:hover{
+   transform: scale(1.5);
+  }
   </style>
   <link rel="stylesheet" href="universal.css">
 </head>
@@ -74,29 +88,30 @@
   <div class="con"></div>
   <div class="container-fluid main">
     <div class="container-fluid nav-section mb-5">
-      <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
+      <nav class="navbar navbar-expand-sm  fixed-top bg-info">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
             <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
           </a>
-          <h5 class="nav-title text-muted mt-2">Olive Energy Meter</h5>
+          <h5 class="nav-title text-dark mt-2">Olive Energy Meter</h5>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse " id="mynavbar">
-            <ul class="navbar-nav me-auto">
+          <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto" style="display: flex; justify-content: center; width: 100%;">
               <li class="nav-item">
-                <a class="nav-link " href="home.html">Home</a>
-              </li>
-              <li class="nav-item ">
-                <a class="nav-link " href="addProjects.html">Project </a>
+                <a class="nav-link" href="home.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="addUser.html">User </a>
-            </li>
+                <a class="nav-link" href="addProjects.html">Project</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="addUser.html">User</a>
+              </li>
             </ul>
-            <div >
-              
+            <div>
+          </div>
+          
 
               <form id="searchForm" class="d-flex">
                   <input id="searchInput"  list="page"  class="form-control me-2" type="text" placeholder="Search">
@@ -128,81 +143,147 @@
     </div>
     <button onclick="scrollToTop()" id="scrollToTop"  class="btn btn-secondary" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
     <div class="container-fluid main-section mt-5">
-      <div class="row mt-5 pt-5 ps-3 ">
-        <ul class="breadcrumb">
-          <li class="breadcrumb-item"><a href="home.html"><i class="fa fa-home "></i> Home </a></i></li>
-
-
-
-        </ul>
-      </div>
-
+      
       <div class="row mt-3 ">
-        <div class="col-lg-8 col-md-12 aside-section main-item">
-          <div class="row">
-          
-            <div class="col-lg-5 col-md-12 me-3 bg-white p-3    border border-secondary border-3" style="height: 380px;">
-              <div class="card   expandable-card" id="expandCard">
-                <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;"> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                  <i class="fa fa-question-circle" aria-hidden="true"></i>
-                </button></div> -->
-               
-                <div class="card-body ">
-  
-                  <div class="card-title h5 ">Project Summary</div>
-                  <div class="card-text h6 text-secondary">"Developing a cutting-edge system for real-time monitoring of three-phase energy consumption, our project aims to enhance efficiency and reliability in power management."
+        <div class="col-lg-12 col-md-12 aside-section main-item">
+          <div class="row pt-5 ps-3 ">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="home.html"><i class="fa fa-home "></i> Home </a></i></li>
 
-                    "Our focus on accurate data analysis and fault detection ensures proactive maintenance, cost savings, and optimized energy usage."
-                    
-                   </div>
-                 
-            </div>
-          </div>
-          </div>
-            
-            <div class="col-lg-6 col-md-12 ms-lg-3  ms-md-0 bg-white p-3    border border-secondary border-3 expandableDiv" style="height: 380px;" >
-              <div class="card   expandable-card" id="expandCard">
-                <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;"> <button class="fullViewButton btn" ><i class="fa fa-arrows-alt" aria-hidden="true"></i></button> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                  <i class="fa fa-question-circle" aria-hidden="true"></i>
-                </button></div> -->
-               
-                <div class="card-body mt-3">
-  
-              <div id="piechart_3d" style="width: 100%; height: 300px;"></div>
-            </div>
-          </div>
-          </div>
-          </div>
 
-           
-                 
 
-              
-          <div class="row bg-white mt-4  p-4 border border-secondary border-3 expandableDiv me-4" style="height: 600px;" >
-          
-            <div class="card mb-sm-5  expandable-card" id="expandCard">
-              
-              <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;">
-                <button class="fullViewButton btn" ><i class="fa fa-arrows-alt" aria-hidden="true"></i></button> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-              </button></div> -->
-             
-              <div class="card-body mt-3">
-
-            <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-          </div>
+            </ul>
         </div>
+        <div class="row  w3-animate-zoom">
+            <div class="col-lg-12 col-md-12 main-chart">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12  w3-center">
+
+                        <div class="row">
+
+                            <div class="col-lg-6 col-sm-12  p-1">
+                              <div class="row px-2 ms-2 "> <div class="bg-white p-3    border border-light border-3">
+                                <div class="card   expandable-card w3-animate-zoom" id="expandCard">
+                                    <div class="card-header text-primary h4">Overall Products Summary</div>
+                                    <div class="card-body py-4" >
+
+                                      <div class="row">
+                                        <div class="col-lg-6">
+                                          <div class="card-title">Overall Units </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                          <div class="card-text h5 text-success">
+                                            11
+
+                                        </div>
+                                        </div>
+                                      </div>
+                                       
+                                       
+                                        
+                                      <div class="row">
+                                        <div class="col-lg-6">
+                                          <div class="card-title">Live Units </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                          <div class="card-text h5 text-success">
+                                            10
+
+                                        </div>
+                                        </div>
+                                      </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="row mt-3 ms-2 px-2">
+                        <div class="bg-white p-3    border border-light border-3">
+
+                          <div class="card   expandable-card w3-animate-zoom" id="expandCard">
+                              <div class="card-header text-primary h4">Overall Production</div>
+                              <div class="card-body py-4" >
+
+<div class="row"><div class="col-lg-6"><div class="card-title">Units Consumed</div></div>
+<div class="col-lg-6"> <div class="card-text h5 text-success">
+  120 <span class="text-dark">INR</span>
+
+</div></div></div>
+                                  <div class="row">
+                                    <div class="col-lg-6"><div class="card-title ">Production Rate </div></div>
+                                 <div class="col-lg-6"> <div class="card-text h5 text-success">
+                                  70 <span class="text-dark">%</span>
+
+                              </div></div>
+                                  </div>
+                                 
+                                  
+                                 
+
+
+
+                              </div>
+                          </div>
+                      </div>
+                      </div>
+                      </div>
+                                 
+                            <div class="col-lg-6 col-sm-12  px-3">
+                              <div class="bg-white p-3    border border-light border-3">
+
+                                <div class="card w3-animate-zoom w-100">
+<div class="card-header">Power Consumption</div>
+                                    <div class="card-body " style="height: 320px;">
+
+
+                                        <div id="piechart_3d"
+                                            style="margin-left: -15px;margin-top:30px;margin-bottom:30px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 ">
+
+                        <div class="row ">
+
+                            <div class="col-lg-12 col-sm-12  px-1 w3-animate-zoom">
+                                <div class="bg-white p-3    border border-light border-3">
+                                    <div class="card   " >
+
+                                        <div class="card-body " style="height: 355px;">
+
+
+                                            <div id="chart"></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                     
+                        </div>
+                    </div>
+                  </div>
+              
+
+                
+            </div>
+         
+
+
         </div>
 
         
-          <div class="row table-menu mb-5">
+          <div class="row table-menu mb-5 px-5">
             <div class="container mt-5 col-12 border-top border-primary pt-4 " style="background-color: rgb(216, 209, 209);" id="tableContent">
              <div class="row">
               <div class="col-lg-4"><div class="h4 text-secondary">Project details</div></div>
               <div class=" col-lg-8 container-fluid d-flex justify-content-end">
                
                 <div class="form d-flex  ">
-                  <button class="btn btn-danger  me-2 w-50" id="refresh"><i class="fa fa-refresh me-2" ></i>Refresh</button>
+                  <!-- <button class="btn btn-danger  me-2 w-50" id="refresh"><i class="fa fa-refresh me-2" ></i>Refresh</button> -->
                     <input type="text" name="search" id="search" class="form-control me-1" size="50"
                         placeholder="Search Here" onkeyup="myFunction()">
                    
@@ -210,7 +291,7 @@
               
          
 
-              <table class="table table-primary table-bordered mt-3  table-hover table-responsive" id="usersTable">
+              <table class="table table-primary table-bordered mt-3 w3-center w3-animate-zoom table-hover table-responsive" id="usersTable">
                 <thead>
                   <tr>
                     <th class="py-3">No</th>
@@ -228,46 +309,7 @@
 
           </div>
         </div>
-        <div class="col-lg-4 col-md-12 right-section">
-          <div class="row">
-
-
-
-            <div class="col-lg-12 col-md-12  bg-white p-3    border border-secondary border-3 expandableDiv" style="height: 380px;" >
-              <div class="card   expandable-card" id="expandCard">
-                <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;"> <button class="fullViewButton btn" ><i class="fa fa-arrows-alt" aria-hidden="true"></i></button> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                  <i class="fa fa-question-circle" aria-hidden="true"></i>
-                </button></div> -->
-               
-                <div class="card-body ">
-  
-              <div id="line_top_x" style="width: 100%; height: 300px;"></div>
-            </div>
-          </div>
-          </div>
-          </div>
-          
-
-          <div class="row mt-4">
-            
-            <div class="col-lg-12 col-md-12  bg-white p-3    border border-secondary border-3 expandableDiv" style="height: 600px;" >
-              <div class="card   expandable-card" id="expandCard">
-                <!-- <div class="d-flex justify-content-end" style="position: absolute;right: 0;"> <button class="fullViewButton btn" ><i class="fa fa-arrows-alt" aria-hidden="true"></i></button> <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                  <i class="fa fa-question-circle" aria-hidden="true"></i>
-                </button></div> -->
-               
-                <div class="card-body " style="height: 560px;">
-                   <div class="card-title">consumed cost by <span class="text-primary">Day</span></div>
-                   <div id="chart-div"
-                   style="position:absolute;top:170px;left:-100px; transform: rotate(90deg); width: 500px; height: 250px;">
-                 </div>
-             
-            </div>
-          </div>
-          </div>
-
-          </div>
-        </div>
+      
       </div>
     </div>
 
@@ -297,9 +339,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
 
@@ -308,285 +348,132 @@
 
 
 <script type="text/javascript">
-       google.charts.load('current', { 'packages': ['bar'] });
-    google.charts.setOnLoadCallback(drawChart);
+  // Function to get the last two days' names
+  function getLastTwoDays() {
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
 
-    function drawChart() {
-      // Get current date and previous day of the week
-      var today = new Date();
-      var previousDayIndex = (today.getDay() - 1 + 7) % 7; // Adjust for Sunday (0)
-      var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
-      var previousDayLabel = daysOfWeek[previousDayIndex];
+    return [
+      daysOfWeek[yesterday.getDay()],
+      daysOfWeek[today.getDay()]
+    ];
+  }
 
-      // Random data for the previous day
-      var meter1PreviousDay = getRandomValue();
-      var meter2PreviousDay = getRandomValue();
-      var meter3PreviousDay = getRandomValue();
-
-      var data = google.visualization.arrayToDataTable([
-        ['Day', 'Meter 1', 'Meter 2', 'Meter 3'], 
-       
-        ['wed', 570, 460, 250],
-        ['thur', 560, 400, 300],
-        ['fri', 450, 540, 350],
-        ['sat', 450, 540, 350],
-        ['sun', 450, 540, 350],
-        ['Mon', 500, 400, 300],
-        [previousDayLabel, meter1PreviousDay, meter2PreviousDay, meter3PreviousDay]
-       
-      ]);
-
-      var options = {
-        chart: {
-          title: 'Meter Overall Consumption',
-          subtitle: 'Meter 1, Meter 2, and Meter 3: Mon-Sun',
-        },
-        width: 650,
-        height: 500
-      };
-
-      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-      chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-
-    // Function to generate random value between 100 and 200
-    function getRandomValue() {
-      return Math.floor(Math.random() * 101) + 100;
-    }
-</script>
-
-<script type="text/javascript">
-  google.charts.load('current', { 'packages': ['line'] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Day');
-      data.addColumn('number', ' R Voltage');
-      data.addColumn('number', 'Y Voltage');
-      data.addColumn('number', 'B Voltage');
-
-      // Initial data with random approximate values
-      var initialData = [
-        [1, getRandomValue(35, 40), getRandomValue(75, 85), getRandomValue(40, 45)],
-        [2, getRandomValue(28, 32), getRandomValue(65, 75), getRandomValue(30, 35)],
-        [3, getRandomValue(23, 27), getRandomValue(52, 62), getRandomValue(22, 28)],
-        [4, getRandomValue(10, 15), getRandomValue(17, 23), getRandomValue(8, 12)],
-        [5, getRandomValue(10, 15), getRandomValue(16, 22), getRandomValue(8, 12)],
-        [6, getRandomValue(8, 12), getRandomValue(12, 18), getRandomValue(7, 10)],
-        [7, getRandomValue(6, 10), getRandomValue(11, 15), getRandomValue(9, 13)],
-        [8, getRandomValue(11, 15), getRandomValue(27, 33), getRandomValue(10, 14)],
-        [9, getRandomValue(15, 20), getRandomValue(38, 45), getRandomValue(13, 17)],
-        [10, getRandomValue(12, 16), getRandomValue(28, 33), getRandomValue(11, 15)],
-        [11, getRandomValue(5, 8), getRandomValue(7, 11), getRandomValue(4, 6)],
-        [12, getRandomValue(6, 9), getRandomValue(8, 11), getRandomValue(5, 7)],
-        [13, getRandomValue(4, 7), getRandomValue(5, 8), getRandomValue(3, 5)],
-        [14, getRandomValue(3, 5), getRandomValue(5, 7), getRandomValue(3, 5)]
-      ];
-      data.addRows(initialData);
-
-      var options = {
-        chart: {
-          title: 'Three Phase energy',
-          subtitle: 'Incoming voltage'
-        },
-        width: 270,
-        height: 260,
-        colors: ["Red", "Blue", "Green"],
-        axes: {
-          x: {
-            0: { side: 'top' }
-          }
-        },
-        lineWidth: 10
-      };
-
-      var chart = new google.charts.Line(document.getElementById('line_top_x'));
-      chart.draw(data, google.charts.Line.convertOptions(options));
-
-      // Function to update random values for each data point every 10 seconds
-      
-     
-      
-
-      // Function to generate random value between min and max
-      function getRandomValue(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-    }setInterval(drawChart, 10000);
-
-</script>
-
-
-
-<script>
-google.charts.load("current", { packages: ["corechart"] });
-google.charts.setOnLoadCallback(drawChart);
-
-function drawChart() {
-  // Generate random production values for each meter
-  var meter1Production = Math.floor(Math.random() * 20) + 1; // Random value between 1 and 20
-  var meter2Production = Math.floor(Math.random() * 20) + 1;
-  var meter3Production = Math.floor(Math.random() * 20) + 1;
-
-  var data = google.visualization.arrayToDataTable([
-    ['Meter', 'Production'],
-    ['Meter 1', meter1Production],
-    ['Meter 2', meter2Production],
-    ['Meter 3', meter3Production]
-  ]);
+  const lastTwoDays = getLastTwoDays();
 
   var options = {
-    title: 'Production report',
-    is3D: true,
-    height: 250,
-    width: 330
+    series: [{
+      name: 'Cost $',
+      data: [100, 200]
+    }],
+    annotations: {
+      points: [{
+        x: 'Production',
+        seriesIndex: 0,
+        label: {
+          borderColor: '#775DD0',
+          offsetY: 0,
+          style: {
+            color: '#fff',
+            background: '#775DD0',
+          },
+          text: '',
+        }
+      }]
+    },
+    title: {
+      text: 'Overall Production',
+      align: 'left'
+    },
+    chart: {
+      height: 350,
+      type: 'bar',
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 10,
+        columnWidth: '50%',
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      width: 0
+    },
+    grid: {
+      row: {
+        colors: ['#fff', '#f2f2f2']
+      }
+    },
+    xaxis: {
+      labels: {
+        rotate: -45
+      },
+      categories: lastTwoDays,
+      tickPlacement: 'on'
+    },
+    yaxis: {
+      title: {
+        text: 'COST',
+      },
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'light',
+        type: "horizontal",
+        shadeIntensity: 0.25,
+        gradientToColors: undefined,
+        inverseColors: true,
+        opacityFrom: 0.85,
+        opacityTo: 0.85,
+        stops: [50, 0, 100]
+      },
+    }
   };
 
-  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-  chart.draw(data, options);
-}
-
-// Schedule the chart update to happen daily
-setInterval(drawChart,10000); // Update every 24 hours
-
-
+  var chart = new ApexCharts(document.querySelector("#chart"), options);
+  chart.render();
 </script>
-<script>
-  google.charts.load('upcoming', { 'packages': ['vegachart'] }).then(drawChart);
 
 
-function drawChart() {
-  const dataTable = new google.visualization.DataTable();
-  dataTable.addColumn({ type: 'string', 'id': 'category' });
-  dataTable.addColumn({ type: 'number', 'id': 'amount' });
-
-  // Initial random data
-  let dataRows = [
-    ['1', getRandomNumber()],
-    ['2', getRandomNumber()],
-    ['3', getRandomNumber()],
-    ['4', getRandomNumber()],
-    ['5', getRandomNumber()],
-    ['6', getRandomNumber()],
-    ['7', getRandomNumber()],
-    ['8', getRandomNumber()],
-    ['9', getRandomNumber()],
-  ];
-  dataTable.addRows(dataRows);
-
-  const options = {
-      "vega": {
-        "$schema": "https://vega.github.io/schema/vega/v4.json",
-        "width": 480,
-        "height": 200,
-        "padding": 5,
-  
-
-        'data': [{ 'name': 'table', 'source': 'datatable' }],
-
-        "signals": [
-          {
-            "name": "tooltip",
-            "value": {},
-            "on": [
-              { "events": "rect:mouseover", "update": "datum" },
-              { "events": "rect:mouseout", "update": "{}" }
-            ]
-          }
-        ],
-
-        "scales": [
-          {
-            "name": "xscale",
-            "type": "band",
-            "domain": { "data": "table", "field": "category" },
-            "range": "width",
-            "padding": 0.05,
-            "round": true
-          },
-          {
-            "name": "yscale",
-            "domain": { "data": "table", "field": "amount" },
-            "nice": true,
-            "range": "height"
-          }
-        ],
-
-        "axes": [
-          { "orient": "bottom", "scale": "xscale" },
-          { "orient": "left", "scale": "yscale" }
-        ],
-
-        "marks": [
-          {
-            "type": "rect",
-            "from": { "data": "table" },
-            "encode": {
-              "enter": {
-                "x": { "scale": "xscale", "field": "category" },
-                "width": { "scale": "xscale", "band": 1 },
-                "y": { "scale": "yscale", "field": "amount" },
-                "y2": { "scale": "yscale", "value": 0 }
+<script type="text/javascript">
+  var options = {
+      series: [44, 55, 13, 33, 22], // Make sure the number of values matches the number of labels
+      chart: {
+          width: 380,
+          type: 'donut',
+      },
+      title: {
+      text: '',
+      align: 'left'
+    },
+      labels: ['Machine 1', 'Machine 2', 'Machine 3', 'Machine 4', 'Machine 5'], // Add this line for labels
+      dataLabels: {
+          enabled: false
+      },
+      responsive: [{
+          breakpoint: 480,
+          options: {
+              chart: {
+                  width: 200
               },
-              "update": {
-                "fill": { "value": "steelblue" }
-              },
-              "hover": {
-                "fill": { "value": "red" }
+              legend: {
+                  show: false
               }
-            }
-          },
-          {
-            "type": "text",
-            "encode": {
-              "enter": {
-                "align": { "value": "center" },
-                "baseline": { "value": "bottom" },
-                "fill": { "value": "#333" }
-              },
-              "update": {
-                "x": { "scale": "xscale", "signal": "tooltip.category", "band": 0.5 },
-                "y": { "scale": "yscale", "signal": "tooltip.amount", "offset": -2 },
-                "text": { "signal": "tooltip.amount" },
-                "fillOpacity": [
-                  { "test": "datum === tooltip", "value": 0 },
-                  { "value": 1 }
-                ]
-              }
-            }
           }
-        ]
+      }],
+      legend: {
+          show: true,
+          position: 'bottom'
       }
-    };
+  };
 
-
-  const chart = new google.visualization.VegaChart(document.getElementById('chart-div'));
-  chart.draw(dataTable, options);
-
-  // Update data every 10 seconds
-  setInterval(() => {
-    dataRows = [
-      ['1', getRandomNumber()],
-      ['2', getRandomNumber()],
-      ['3', getRandomNumber()],
-      ['4', getRandomNumber()],
-      ['5', getRandomNumber()],
-      ['6', getRandomNumber()],
-      ['7', getRandomNumber()],
-      ['8', getRandomNumber()],
-      ['9', getRandomNumber()],
-    ];
-    dataTable.removeRows(0, dataTable.getNumberOfRows());
-    dataTable.addRows(dataRows);
-    chart.draw(dataTable, options);
-  }, 10000); // 10 seconds in milliseconds
-}
-
-// Function to generate random number between 1 and 100
-function getRandomNumber() {
-  return Math.floor(Math.random() * 100) + 1;
-}
+  var chart = new ApexCharts(document.querySelector("#piechart_3d"), options);
+  chart.render();
 </script>
 
 

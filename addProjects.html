@@ -32,6 +32,19 @@
             background-color: rgb(227, 229, 231);
             padding: 20px;
         }
+        .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+font-size: 20px;
+  }
+  .nav-item {
+    padding: 0px 30px;
+    transition:all  .4s ease-in-out;
+  }
+  .nav-item:hover{
+   transform: scale(1.5);
+  }
         .breadcrumb-item a{
         color: inherit;
         text-decoration: inherit;
@@ -62,7 +75,7 @@
 <body>
     
         <div class="container-fluid nav-section mb-5">
-            <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
+            <nav class="navbar navbar-expand-sm  fixed-top bg-info">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
@@ -71,29 +84,34 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse ms-5" id="mynavbar">
-                        <ul class="navbar-nav me-auto ">
-                            <li class="nav-item ">
-                                <a class="nav-link " href="home.html">Home</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="addProjects.html">Project </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " href="addUser.html">User </a>
-                            </li>
+                    <div class="collapse navbar-collapse" id="mynavbar">
+                        <ul class="navbar-nav me-auto" style="display: flex; justify-content: center; width: 100%;">
+                          <li class="nav-item">
+                            <a class="nav-link" href="home.html">Home</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="addProjects.html">Project</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="addUser.html">User</a>
+                          </li>
                         </ul>
-                        <form id="searchForm" class="d-flex">
-                            <input id="searchInput"  list="page"  class="form-control me-2" type="text" placeholder="Search">
-                            <datalist id="page">
-                              <option value="home">
-                              <option value="project">
-                              <option value="user">
-                           
-                            </datalist>
-                            <button id="searchButton" class="btn btn-primary me-5" type="submit">Search</button>
-                        </form>
-                    </div>
+                        <div>
+                      </div>
+                      
+            
+                          <form id="searchForm" class="d-flex">
+                              <input id="searchInput"  list="page"  class="form-control me-2" type="text" placeholder="Search">
+                              <datalist id="page">
+                                <option value="home">
+                                <option value="project">
+                                <option value="user">
+                             
+                              </datalist>
+                              <button id="searchButton" class="btn btn-primary me-5" type="submit">Search</button>
+                          </form>
+                          <div id="searchResults"></div>
+                      </div>
                 </div>
             </nav>
 
@@ -111,7 +129,7 @@
                     <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
                     <div class="container-fluid d-flex justify-content-end">
                         <div class="form d-flex me-4 pe-5 ">
-                            <button class="btn btn-primary  me-2 w-50" id="refresh"><i class="fa fa-refresh me-2" ></i>Refresh</button>
+                            <!-- <button class="btn btn-primary  me-2 w-50" id="refresh"><i class="fa fa-refresh me-2" ></i>Refresh</button> -->
                             <input type="text" name="search" id="search" class="form-control me-1"
                                 placeholder="Search Here">
                             <button class="btn btn-warning" type="button" id="searchTable">Search</button>

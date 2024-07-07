@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olive Energy Meter</title><link rel="icon" type="image/png" href="logo.png">
+    <title>Olive Energy Meter</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -13,8 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-        <script src="scrollTop.js"></script>
-        <link rel="stylesheet" href="universal.css">
+    <script src="scrollTop.js"></script>
+    <link rel="stylesheet" href="universal.css">
     <script src="search.js"></script>
     <script src="desktop.js"></script>
     <style>
@@ -30,108 +31,139 @@
             background-color: rgb(227, 229, 231);
             padding: 20px;
         }
-        .breadcrumb-item a{
-        color: inherit;
-        text-decoration: inherit;
+
+        .navbar-nav {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 20px;
         }
-        .alert-message
-        {
-            position:absolute;
-            top:70px;
-            right:30px;
+
+        .nav-item {
+            padding: 0px 30px;
+            transition: all .4s ease-in-out;
         }
+
+        .nav-item:hover {
+            transform: scale(1.5);
+        }
+
+        .breadcrumb-item a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        .alert-message {
+            position: absolute;
+            top: 70px;
+            right: 30px;
+        }
+
         .footer {
-    position: absolute;
-    bottom: 0;
-    left: 0; /* Make sure the footer spans the full width */
-    width: 100%; /* Ensure the footer spans the full width */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center vertically */
-    background-color: #333; /* Just for visualization */
-    color: white; /* Just for visualization */
-}
-       
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            /* Make sure the footer spans the full width */
+            width: 100%;
+            /* Ensure the footer spans the full width */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Center vertically */
+            background-color: #333;
+            /* Just for visualization */
+            color: white;
+            /* Just for visualization */
+        }
     </style>
 </head>
 
 <body>
-    
-        <div class="container-fluid nav-section mb-5">
-            <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
-                    </a>
-                    <h5 class="nav-title text-muted mt-2">Olive Energy Meter</h5>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse ms-5" id="mynavbar">
-                        <ul class="navbar-nav me-auto ">
-                            <li class="nav-item ">
-                                <a class="nav-link " href="home.html">Home</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="addProjects.html">Project </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " href="addUser.html">User </a>
-                            </li>
-                        </ul>
-                        <form id="searchForm" class="d-flex">
-                            <input id="searchInput"  list="page"  class="form-control me-2" type="text" placeholder="Search">
-                            <datalist id="page">
-                              <option value="home">
-                              <option value="project">
-                              <option value="user">
-                           
-                            </datalist>
-                            <button id="searchButton" class="btn btn-primary me-5" type="submit">Search</button>
-                        </form>
+
+    <div class="container-fluid nav-section mb-5">
+        <nav class="navbar navbar-expand-sm  fixed-top bg-info">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+                </a>
+                <h5 class="nav-title text-muted mt-2">Olive Energy Meter</h5>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto" style="display: flex; justify-content: center; width: 100%;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="addProjects.html">Project</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="addUser.html">User</a>
+                        </li>
+                    </ul>
+                    <div>
                     </div>
+
+
+                    <form id="searchForm" class="d-flex">
+                        <input id="searchInput" list="page" class="form-control me-2" type="text" placeholder="Search">
+                        <datalist id="page">
+                            <option value="home">
+                            <option value="project">
+                            <option value="user">
+
+                        </datalist>
+                        <button id="searchButton" class="btn btn-primary me-5" type="submit">Search</button>
+                    </form>
+                    <div id="searchResults"></div>
                 </div>
-            </nav>
+            </div>
+        </nav>
 
 
-        </div>
-        <button onclick="scrollToTop()" id="scrollToTop"  class="btn btn-secondary" title="Go to top"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>    
-    
+    </div>
+    <button onclick="scrollToTop()" id="scrollToTop" class="btn btn-secondary" title="Go to top"><i
+            class="fa fa-arrow-up" aria-hidden="true"></i></button>
+
     <div class="container-fluid">
         <div class="row ">
             <nav aria-label="breadcrumb ">
 
                 <ol class="breadcrumb mt-2  ">
-                    <li class="breadcrumb-item"><a href="home.html" ><i class="fa fa-home "></i></a></i></li>
-                    <li class="breadcrumb-item active pt-2" aria-current="page"><a href="addUser.html" >User Management</a></li>
-                    
+                    <li class="breadcrumb-item"><a href="home.html"><i class="fa fa-home "></i></a></i></li>
+                    <li class="breadcrumb-item active pt-2" aria-current="page"><a href="addUser.html">User
+                            Management</a></li>
+
                     <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
                     <div class="container-fluid d-flex justify-content-end">
                         <div class="form d-flex me-4 pe-5 ">
-                            <button class="btn btn-primary  me-2 w-50" id="refresh"><i class="fa fa-refresh me-2" ></i>Refresh</button>
+                            <!-- <button class="btn btn-primary  me-2 w-50" id="refresh"><i
+                                    class="fa fa-refresh me-2"></i>Refresh</button> -->
                             <input type="text" name="search" id="search" class="form-control me-1"
                                 placeholder="Search Here">
                             <button class="btn btn-warning" type="button" id="searchTable">Search</button>
                         </div>
-                        <button class="btn btn-secondary float-end py-1 px-3" id="addPage"><i class="fa fa-plus"></i><a  style="color: inherit;
+                        <button class="btn btn-secondary float-end py-1 px-3" id="addPage"><i class="fa fa-plus"></i><a
+                                style="color: inherit;
                             text-decoration: inherit;">Add</a></button>
-                       
-                
-                       <button class="btn btn-primary float-end ms-2 py-1 px-3"><a href="home.html" style="  color: inherit;
-                        text-decoration: inherit;"><i class="fa fa-reply pe-2"
-                        aria-hidden="true"></i> back</a></button>
-                        
-    
+
+
+                        <button class="btn btn-primary float-end ms-2 py-1 px-3"><a href="home.html" style="  color: inherit;
+                        text-decoration: inherit;"><i class="fa fa-reply pe-2" aria-hidden="true"></i>
+                                back</a></button>
+
+
                     </div>
 
                 </ol>
             </nav>
-            
+
 
         </div>
     </div>
     <div class="container-fluid   border-top border-primary p-5" style="background-color: lightgrey;">
-           
+
         <div class="row table-customer px-2 py-2">
             <div class=" col-12">
                 <div class="h4 mb-3">Users Details </div>
@@ -142,18 +174,20 @@
                             <th class="py-3">Project Name </th>
                             <th class="py-3">User Name </th>
                             <th class="py-3">Email</th>
-                            
+
                             <th class="py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-light" id="usersTableBody">
-                     </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
 
     </div>
-    <footer class="footer"><h5 class="footer-content">&copy;All Rights Reserved Olive IOT</h5></footer>
+    <footer class="footer">
+        <h5 class="footer-content">&copy;All Rights Reserved Olive IOT</h5>
+    </footer>
 </body>
 
 <script type="module">
@@ -166,50 +200,50 @@
     //  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
     // import { getDatabase,ref,onValue} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js"; 
     // import { getDatabase, ref, onValue } from "./firebase/database";
-    import { getDatabase, ref,onChildAdded,orderByChild, onValue, remove } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+    import { getDatabase, ref, onChildAdded, orderByChild, onValue, remove } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
-    
+
     const firebaseConfig = {
-     
+
         apiKey: "AIzaSyCaAt7YTQBOfXph8A7NtLwqayqsqQfPITY",
-            authDomain: "three-phase-energy-meter.firebaseapp.com",
-            projectId: "three-phase-energy-meter",
-            storageBucket: "three-phase-energy-meter.appspot.com",
-            messagingSenderId: "643707481883",
-            appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
-            measurementId: "G-ZC6S4GQJD3"
+        authDomain: "three-phase-energy-meter.firebaseapp.com",
+        projectId: "three-phase-energy-meter",
+        storageBucket: "three-phase-energy-meter.appspot.com",
+        messagingSenderId: "643707481883",
+        appId: "1:643707481883:web:b442d0e444b6a849e06dbe",
+        measurementId: "G-ZC6S4GQJD3"
     };
-    
+
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getDatabase(app);
-// const userId="OliveEnergy";
+    const analytics = getAnalytics(app);
+    const db = getDatabase(app);
+    // const userId="OliveEnergy";
 
 
-// function addProject(projectName) {
-//     const projectsRef = ref(database, 'projects'); // Assuming 'projects' is the path in your database
-//     push(projectsRef, {
-//         name: projectName
-//     });
-// }
+    // function addProject(projectName) {
+    //     const projectsRef = ref(database, 'projects'); // Assuming 'projects' is the path in your database
+    //     push(projectsRef, {
+    //         name: projectName
+    //     });
+    // }
 
 
 
 
 
-    function addTableRow(sequenceNumber,userId) {
-        
-   const userRef  = ref(db, 'projectUsers/'+userId);
-    // const userRef =ref(db,`users/${userId}`); // Assuming 'users' is the path in your database
-    try{
-    onValue(userRef,  (snapshot) => {
-        const user = snapshot.val();
-        if (user) {
-            const usersTableBody = document.getElementById('usersTableBody');
-            const row = document.createElement('tr');
-            const Project_Name=user.Project_Name;
-            row.innerHTML = `
+    function addTableRow(sequenceNumber, userId) {
+
+        const userRef = ref(db, 'projectUsers/' + userId);
+        // const userRef =ref(db,`users/${userId}`); // Assuming 'users' is the path in your database
+        try {
+            onValue(userRef, (snapshot) => {
+                const user = snapshot.val();
+                if (user) {
+                    const usersTableBody = document.getElementById('usersTableBody');
+                    const row = document.createElement('tr');
+                    const Project_Name = user.Project_Name;
+                    row.innerHTML = `
                 <td>${sequenceNumber}</td>
                 <td>${user.Project_Name}</td>
                 <td>${user.User_Name}</td>
@@ -220,122 +254,120 @@ const db = getDatabase(app);
     <button class="btn btn-danger px-2 py-1 ms-1 me-1" data-project-name="${Project_Name}">Delete</button>
 </td>  
             `;
-            console.log(user.Project_Name)
-            usersTableBody.appendChild(row);
+                    console.log(user.Project_Name)
+                    usersTableBody.appendChild(row);
+                }
+            });
+        }
+        catch (e) {
+            console.log("Error to getting Database" + e);
+        }
+    }
+    let sequenceNumber = 1;
+    const userRef1 = ref(db, 'projectUsers');
+    // Call addTableRow for each user
+    onChildAdded(userRef1, (data) => {
+        const userId = data.key;
+        addTableRow(sequenceNumber++, userId);
+    });
+
+
+    function deleteProject(Project_Name) {
+        if (confirm(`Are you sure you want to delete the project "${Project_Name}"?`)) {
+
+            // Find the project to delete by its name
+            try {
+                const projectRef = ref(db, `projectUsers/${Project_Name}`); // Assuming 'projects' is the path in your database
+                remove(projectRef);
+                const alertMessage = document.createElement('div');
+                alertMessage.classList.add('alert', 'alert-danger', 'alert-message');
+                alertMessage.textContent = 'Successfully deleted !';
+                document.body.appendChild(alertMessage);
+
+                setTimeout(() => {
+                    alertMessage.remove(); // Remove the alert after 6 seconds
+                    location.reload(); // Reload the page
+                }, 3000);
+
+
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
+    }
+
+    function refreshPage() {
+        location.reload(); // Reload the page
+    }
+
+    document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('btn-danger')) {
+            const projectName = event.target.getAttribute('data-project-name');
+            if (projectName) {
+                deleteProject(projectName);
+            } else {
+                console.error('Project name not found.');
+            }
         }
     });
-}
-catch(e){
-    console.log("Error to getting Database"+e);
-}
-}
-let sequenceNumber = 1;
-const userRef1  = ref(db, 'projectUsers');
-// Call addTableRow for each user
-onChildAdded(userRef1, (data) => {
-    const userId = data.key;
-    addTableRow(sequenceNumber++,userId);
-});
-
-
-function deleteProject(Project_Name) {
-    if (confirm(`Are you sure you want to delete the project "${Project_Name}"?`)) {
-        
-        // Find the project to delete by its name
-        try{
-            const projectRef = ref(db, `projectUsers/${Project_Name}`); // Assuming 'projects' is the path in your database
-                    remove(projectRef);
-                    const alertMessage = document.createElement('div');
-            alertMessage.classList.add('alert', 'alert-danger',  'alert-message');
-            alertMessage.textContent = 'Successfully deleted !';
-            document.body.appendChild(alertMessage);
-
-            setTimeout(() => {
-                alertMessage.remove(); // Remove the alert after 6 seconds
-                location.reload(); // Reload the page
-            }, 3000);
-
-
-    }
-    catch(e)
-    {
-        console.log(e);
-    }
-    }
-}
-
-function refreshPage() {
-    location.reload(); // Reload the page
-}
-
-document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('btn-danger')) {
-        const projectName = event.target.getAttribute('data-project-name');
-        if (projectName) {
-            deleteProject(projectName);
-        } else {
-            console.error('Project name not found.');
+    document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('btn-primary')) {
+            const projectName = event.target.getAttribute('data-machine-name');
+            if (projectName) {
+                gomachinePage(projectName);
+            } else {
+                console.error('Project name not found.');
+            }
         }
-    }
-});
-document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('btn-primary')) {
-        const projectName = event.target.getAttribute('data-machine-name');
-        if (projectName) {
-            gomachinePage(projectName);
-        } else {
-            console.error('Project name not found.');
-        }
-    }
-});
-document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('btn-success')) {
-        const projectName = event.target.getAttribute('data-edit-name');
-        if (projectName) {
-            editProject(projectName);
-        } else {
-            console.error('Project name not found.');
-        }
-    }
-});
-
-function editProject(projectName){
-    window.location.href = `editUser.html?projectName=${encodeURIComponent(projectName)}`;
-
-}
-
-
-
-document.getElementById('addPage').addEventListener("click",()=>
-{
-
-window.location.href='addProjectuser.html';
-});
-
-document.getElementById('searchTable').addEventListener('click',()=>  {
-      const input = document.getElementById('search');
-      const filter = input.value.toUpperCase();
-      const table = document.getElementById('usersTable');
-      const rows = table.getElementsByTagName('tr');
-
-      for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip the header row
-        const cells = rows[i].getElementsByTagName('td');
-        let found = false;
-        for (let j = 0; j < cells.length; j++) {
-          const cellText = cells[j].innerText.toUpperCase();
-          if (cellText.includes(filter)) {
-            found = true;
-            break;
-          }
-        }
-        rows[i].style.display = found ? '' : 'none';
-      }
     });
-        // Add click event listener to the Refresh button
-        document.getElementById('refresh').addEventListener('click', () => {
+    document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('btn-success')) {
+            const projectName = event.target.getAttribute('data-edit-name');
+            if (projectName) {
+                editProject(projectName);
+            } else {
+                console.error('Project name not found.');
+            }
+        }
+    });
+
+    function editProject(projectName) {
+        window.location.href = `editUser.html?projectName=${encodeURIComponent(projectName)}`;
+
+    }
+
+
+
+    document.getElementById('addPage').addEventListener("click", () => {
+
+        window.location.href = 'addProjectuser.html';
+    });
+
+    document.getElementById('searchTable').addEventListener('click', () => {
+        const input = document.getElementById('search');
+        const filter = input.value.toUpperCase();
+        const table = document.getElementById('usersTable');
+        const rows = table.getElementsByTagName('tr');
+
+        for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip the header row
+            const cells = rows[i].getElementsByTagName('td');
+            let found = false;
+            for (let j = 0; j < cells.length; j++) {
+                const cellText = cells[j].innerText.toUpperCase();
+                if (cellText.includes(filter)) {
+                    found = true;
+                    break;
+                }
+            }
+            rows[i].style.display = found ? '' : 'none';
+        }
+    });
+    // Add click event listener to the Refresh button
+    document.getElementById('refresh').addEventListener('click', () => {
         window.location.reload();
     });
 
 </script>
-</html>
 
+</html>

@@ -39,6 +39,19 @@
             background-color: rgb(227, 229, 231);
             padding: 20px;
         }
+        .navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+font-size: 20px;
+  }
+  .nav-item {
+    padding: 0px 30px;
+    transition:all  .4s ease-in-out;
+  }
+  .nav-item:hover{
+   transform: scale(1.5);
+  }
         .meter-dash {
             background-color: rgb(204, 207, 211);
            
@@ -50,6 +63,48 @@
         }
           /* Styling for sections */
   
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 700px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: modalopen 0.5s;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes modalopen {
+    from {opacity: 0}
+    to {opacity: 1}
+}
+
     </style>
 </head>
 
@@ -57,7 +112,7 @@
    
         <div class="container-fluid main">
             <div class="container-fluid nav-section mb-5 block">
-                <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
+                <nav class="navbar navbar-expand-sm  fixed-top bg-info">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="#">
                             <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
@@ -67,30 +122,34 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         
-                            <div class="collapse navbar-collapse " id="mynavbar">
-                                <ul class="navbar-nav me-auto">
-                                    <li class="nav-item ">
-                                        <a class="nav-link " href="home.html">Home</a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link " href="addProjects.html">Project </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="addUser.html">User </a>
-                                    </li>
-                                </ul>
-                              
-                                <form id="searchForm" class="d-flex">
-                                    <input id="searchInput"  list="page"  class="form-control me-2" type="text" placeholder="Search">
-                                    <datalist id="page">
-                                      <option value="home">
-                                      <option value="project">
-                                      <option value="user">
-                                   
-                                    </datalist>
-                                    <button id="searchButton" class="btn btn-primary me-5" type="submit">Search</button>
-                                </form>
-                        </div>
+                        <div class="collapse navbar-collapse" id="mynavbar">
+                            <ul class="navbar-nav me-auto" style="display: flex; justify-content: center; width: 100%;">
+                              <li class="nav-item">
+                                <a class="nav-link" href="home.html">Home</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="addProjects.html">Project</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="addUser.html">User</a>
+                              </li>
+                            </ul>
+                            <div>
+                          </div>
+                          
+                
+                              <form id="searchForm" class="d-flex">
+                                  <input id="searchInput"  list="page"  class="form-control me-2" type="text" placeholder="Search">
+                                  <datalist id="page">
+                                    <option value="home">
+                                    <option value="project">
+                                    <option value="user">
+                                 
+                                  </datalist>
+                                  <button id="searchButton" class="btn btn-primary me-5" type="submit">Search</button>
+                              </form>
+                              <div id="searchResults"></div>
+                          </div>
                     </div>
                 </nav>
     
@@ -131,18 +190,34 @@
              <div class="h4 col-4 ps-5 mt-3">Live Monitoring</div> 
              <div class="col-lg-8 d-flex justify-content-end">  
                 <div class="alert alert-primary mt-1 me-2" style="margin-bottom: 0 !important;"><span class="me-2 m">Device status</span> <i class="fa fa-circle text-danger pd-2" id="deviceStatus" style="font-size: 20px;" aria-hidden="true"></i></div>
-                 <button class="btn btn-success mt-1"  id="getAllData"><i class="fa fa-download me-1" ></i>Download </button>
+                 <button class="btn btn-success mt-1"  onclick="openModal()"><i class="fa fa-download me-1" ></i>Download </button>
                 <button class="btn btn-danger mt-1 ms-2" id="refresh"><i class="fa fa-refresh me-2" ></i>Refresh</button></div>
            
             
            
     </div>
-    
+    <div class="row px-5 mt-3">  
+
+        <div class="col-lg-12 col-sm-12  px-1 w3-animate-zoom">
+            <div class="bg-white p-3    border border-light border-3">
+                <div class="card   " >
+
+                    <div class="card-body " style="height: 370px;">
+
+
+                        <div id="chartonline"></div>
+
+                    </div>
+                </div>
+            </div>
+       
+</div></div>
      <!-- <div class="alert mt-3 alert-info float-end" style="position:absolute;top: 60px;right: 10px; ">Updated Every <strong>6 </strong>s  once -->
           
             
             
     </div>
+   
        
         <div class="row ps-2  mt-3 block">
             <div class="col-lg-4 ">
@@ -232,6 +307,43 @@
 
 
     </div>
+    </div>
+    <script>
+        function openModal() {
+    document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+}
+
+// Close the modal when clicking outside of the modal content
+window.onclick = function(event) {
+    if (event.target == document.getElementById("myModal")) {
+        closeModal();
+    }
+}
+
+      </script>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form id="historicForm">
+            <div class="row">
+              <div class="col-4"><label class="h5" for="startdate">Start Date:</label></div>
+              <div class="col-8">
+                <input type="datetime-local" class="form-control" id="startdate" name="start_date" required><br><br>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4"><label class="h5" for="enddate">End Date:</label></div>
+              <div class="col-8">
+                <input type="datetime-local" class="form-control" id="enddate" name="end_date" required><br><br>
+              </div>
+            </div>
+            <div class="row"><button type="submit" id="getAllData" class="btn btn-primary">Download</button></div>
+          </form>
     </div>
     <footer class="mt-3 text-center text-primary">&copy;All Rights Reserved Olive IOT</footer>
 </body>
@@ -728,65 +840,180 @@ function reloadPage() {
     console.log(db);
 
     // Function to retrieve data from Firebase
-    document.getElementById('getAllData').addEventListener('click', () => {
+    document.getElementById('historicForm').addEventListener('submit', retrieveHistoricData);
+
+  function retrieveHistoricData(event) {
+    event.preventDefault();
+    const startDate = new Date(document.getElementById('startdate').value).getTime();
+    const endDate = new Date(document.getElementById('enddate').value).getTime();
+
     try {
-        const dataRef = ref(db, 'mqttDataBase/data'); // Update the path to match your Firebase data path
-        
-        // Fetch all data under 'data'
-        onValue(dataRef, (snapshot) => {
-            var dataString = snapshot.val(); // Get all data as an object
-            
-            if (dataString) {
-                // Convert data object to CSV format
-                let csvContent = "Timestamp,PV01,PV02,PV03,PV04,PV05,PV06,PV07,PV08,PV09,Device Status \n"; // CSV header
-                Object.keys(dataString).forEach((timestamp) => {
-                    var rowData = null;
-                        try {
-                    rowData = JSON.parse(dataString);
-                     } catch (e) {
-      console.error("Error parsing JSON:", e);
-      return; // Exit the function if parsing fails
-    } // Parse JSON data
-                    const rowValues = [
-                        rowData.timestamp,
-                        rowData.PV01,
-                        rowData.PV02,
-                        rowData.PV03,
-                        rowData.PV04,
-                        rowData.PV05,
-                        rowData.PV06,
-                        rowData.PV07,
-                        rowData.PV08,
-                        rowData.PV09,
-                        rowData.PV10
-                    ];
-                    csvContent += rowValues.join(",") + "\n";
-                });
-                console.log(csvContent)
-                // Download the CSV file
-                const downloadLink = document.createElement("a");
-                const blob = new Blob([csvContent], { type: "text/csv" });
-                const url = URL.createObjectURL(blob);
-                downloadLink.href = url;
-                const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
-                downloadLink.download = `mqttData_${currentDate}.csv`; // Dynamically set the file name
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-            } else {
-                console.error('No data available.');
+      const dataRef = ref(db, 'mqttDataBase/data'); // Update the path to match your Firebase data path
+
+      onValue(dataRef, (snapshot) => {
+        var dataString = snapshot.val(); // Get all data as an object
+
+        if (dataString) {
+          // Convert data object to CSV format
+          let csvContent = "Timestamp,PV01,PV02,PV03,PV04,PV05,PV06,PV07,PV08,PV09,Device Status \n"; // CSV header
+          Object.keys(dataString).forEach((key) => {
+            var rowData = null;
+            try {
+              rowData = JSON.parse(dataString[key]);
+            } catch (e) {
+              console.error("Error parsing JSON:", e);
+              return; // Exit the function if parsing fails
             }
-        });
+            
+            // Check if the timestamp is within the specified range
+            const timestamp = new Date(rowData.timestamp).getTime();
+            if (timestamp >= startDate && timestamp <= endDate) {
+              const rowValues = [
+                rowData.timestamp,
+                rowData.PV01,
+                rowData.PV02,
+                rowData.PV03,
+                rowData.PV04,
+                rowData.PV05,
+                rowData.PV06,
+                rowData.PV07,
+                rowData.PV08,
+                rowData.PV09,
+                rowData.DeviceStatus
+              ];
+              csvContent += rowValues.join(",") + "\n";
+            }
+          });
+
+          if (csvContent !== "Timestamp,PV01,PV02,PV03,PV04,PV05,PV06,PV07,PV08,PV09,Device Status \n") {
+            // Download the CSV file
+            const downloadLink = document.createElement("a");
+            const blob = new Blob([csvContent], { type: "text/csv" });
+            const url = URL.createObjectURL(blob);
+            downloadLink.href = url;
+            const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+            downloadLink.download = `mqttData_${currentDate}.csv`; // Dynamically set the file name
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+          } else {
+            window.alert('No data available within the specified range.');
+          }
+        } else {
+           window.alert('No data available.');
+        }
+      });
     } catch (error) {
-        console.error('Error:', error);
+      console.error('Error:', error);
     }
-});
+  }
 document.getElementById("refresh").addEventListener("click",()=>{
 
     window.location.reload();
 })
 </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script type="text/javascript">
+    var datesR = [
+      { x: new Date('2023-01-01').getTime(), y: 1000000 },
+      { x: new Date('2023-02-01').getTime(), y: 2000000 },
+      { x: new Date('2023-03-01').getTime(), y: 1500000 },
+      { x: new Date('2023-04-01').getTime(), y: 2500000 },
+      { x: new Date('2023-05-01').getTime(), y: 3000000 }
+    ];
+    
+    var datesY = [
+      { x: new Date('2023-01-01').getTime(), y: 1100000 },
+      { x: new Date('2023-02-01').getTime(), y: 2100000 },
+      { x: new Date('2023-03-01').getTime(), y: 1600000 },
+      { x: new Date('2023-04-01').getTime(), y: 2600000 },
+      { x: new Date('2023-05-01').getTime(), y: 3100000 }
+    ];
+    
+    var datesB = [
+      { x: new Date('2023-01-01').getTime(), y: 1200000 },
+      { x: new Date('2023-02-01').getTime(), y: 2200000 },
+      { x: new Date('2023-03-01').getTime(), y: 1700000 },
+      { x: new Date('2023-04-01').getTime(), y: 2700000 },
+      { x: new Date('2023-05-01').getTime(), y: 3200000 }
+    ];
+  
+    var options = {
+      series: [
+        {
+          name: 'R Phase',
+          data: datesR
+        },
+        {
+          name: 'Y Phase',
+          data: datesY
+        },
+        {
+          name: 'B Phase',
+          data: datesB
+        }
+      ],
+      chart: {
+        type: 'area',
+        stacked: false,
+        height: 350,
+        zoom: {
+          type: 'x',
+          enabled: true,
+          autoScaleYaxis: true
+        },
+        toolbar: {
+          autoSelected: 'zoom'
+        }
+      },
+      colors: [ '#0000FF', '#FFFF00','#FF0000'], // Blue, Yellow, Red
+      dataLabels: {
+        enabled: false
+      },
+      markers: {
+        size: 0,
+      },
+      title: {
+        text: 'Three Phase Voltage Monitoring',
+        align: 'left'
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shadeIntensity: 1,
+          inverseColors: false,
+          opacityFrom: 0.5,
+          opacityTo: 0,
+          stops: [0, 90, 100]
+        },
+      },
+      yaxis: {
+        labels: {
+          formatter: function (val) {
+            return (val / 1000000).toFixed(0);
+          },
+        },
+        title: {
+          text: 'Voltage (in millions)'
+        },
+      },
+      xaxis: {
+        type: 'datetime',
+      },
+      tooltip: {
+        shared: true,
+        y: {
+          formatter: function (val) {
+            return (val / 1000000).toFixed(0);
+          }
+        }
+      }
+    };
+  
+    var chart = new ApexCharts(document.querySelector("#chartonline"), options);
+    chart.render();
+  </script>
+  
 
 </html>

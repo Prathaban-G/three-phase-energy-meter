@@ -26,10 +26,34 @@
             letter-spacing: 1px;
 
         }
+        
+        .required::after
+        {
+        content: "*";
+position: absolute;
+right: 20px;
+bottom: 0;
+        }
 
         body {
             background-color: rgb(227, 229, 231);
             padding: 20px;
+        }
+
+        .navbar-nav {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 20px;
+        }
+
+        .nav-item {
+            padding: 0px 30px;
+            transition: all .4s ease-in-out;
+        }
+
+        .nav-item:hover {
+            transform: scale(1.5);
         }
 
         .breadcrumb-item a {
@@ -42,21 +66,30 @@
             top: 100px;
             right: 50px;
         }
+        .required-label::after {
+            
+    content: " *";
+    
+   
+   
+    color: #dc3545; 
+    /* Bootstrap danger color */
+}
 
         .footer {
-    margin-top: 290px;
-    left: 0;
-    /* Make sure the footer spans the full width */
-    width: 100%;
-    /* Ensure the footer spans the full width */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Center vertically */
-    /* Just for visualization */
-    color: black;
-    /* Just for visualization */
-}
+            margin-top: 290px;
+            left: 0;
+            /* Make sure the footer spans the full width */
+            width: 100%;
+            /* Ensure the footer spans the full width */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Center vertically */
+            /* Just for visualization */
+            color: black;
+            /* Just for visualization */
+        }
     </style>
 </head>
 
@@ -64,7 +97,7 @@
 
     <div class="container-fluid main">
         <div class="container-fluid nav-section mb-5">
-            <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
+            <nav class="navbar navbar-expand-sm  fixed-top bg-info">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
@@ -73,28 +106,34 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse " id="mynavbar">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item ">
-                                <a class="nav-link " href="home.html">Home</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="addProjects.html">Project </a>
+                    <div class="collapse navbar-collapse" id="mynavbar">
+                        <ul class="navbar-nav me-auto" style="display: flex; justify-content: center; width: 100%;">
+                            <li class="nav-item">
+                                <a class="nav-link" href="home.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="addUser.html">User </a>
+                                <a class="nav-link" href="addProjects.html">Project</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="addUser.html">User</a>
                             </li>
                         </ul>
+                        <div>
+                        </div>
+
+
                         <form id="searchForm" class="d-flex">
-                            <input id="searchInput"  list="page"  class="form-control me-2" type="text" placeholder="Search">
+                            <input id="searchInput" list="page" class="form-control me-2" type="text"
+                                placeholder="Search">
                             <datalist id="page">
-                              <option value="home">
-                              <option value="project">
-                              <option value="user">
-                           
+                                <option value="home">
+                                <option value="project">
+                                <option value="user">
+
                             </datalist>
                             <button id="searchButton" class="btn btn-primary me-5" type="submit">Search</button>
                         </form>
+                        <div id="searchResults"></div>
                     </div>
                 </div>
             </nav>
@@ -135,25 +174,24 @@
                     <div class="col">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="text-start text-dark p-2">Project Name</h4>
+                                <h6 class="text-start text-dark p-2 required-label">Project Name</h6>
                             </div>
-
+                        
                             <div class="col-8">
-                                <input type="text" class="form-control " placeholder="Enter Project Name" id="proname"
-                                    name="pname">
+                                <input type="text" class="form-control" placeholder="Enter Project Name" id="proname" name="pname" required>
                             </div>
                         </div>
-
+                        
                     </div>
                     <div class="col">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="text-start text-dark p-2">Address </h4>
+                                <h6 class="text-start text-dark p-2 required-label">Address </h4>
                             </div>
 
                             <div class="col-8">
                                 <input type="text" class="form-control" placeholder="Enter Address " id="caddress"
-                                    name="address">
+                                    name="address" required>
                             </div>
                         </div>
 
@@ -163,12 +201,12 @@
                     <div class="col">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="text-start text-dark p-2">Company Name</h4>
+                                <h6 class="text-start text-dark p-2 required-label">Company Name</h4>
                             </div>
 
                             <div class="col-8">
                                 <input type="text" class="form-control" placeholder="Enter Company Name" id="ccname"
-                                    name="ccname">
+                                    name="ccname" required>
                             </div>
                         </div>
 
@@ -176,12 +214,12 @@
                     <div class="col">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="text-start text-dark p-2">City</h4>
+                                <h6 class="text-start text-dark p-2 required-label">City</h4>
                             </div>
 
                             <div class="col-8">
                                 <input type="text" class="form-control" placeholder="Enter City" id="ccity"
-                                    name="ccity">
+                                    name="ccity" required>
                             </div>
                         </div>
 
@@ -191,12 +229,12 @@
                     <div class="col">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="text-start text-dark p-2">Contact Person</h4>
+                                <h6 class="text-start text-dark p-2 required-label">Contact Person</h4>
                             </div>
 
                             <div class="col-8">
                                 <input type="text" class="form-control" id="cpname" placeholder="Enter Person Name"
-                                    name="cpname">
+                                    name="cpname" required>
                             </div>
                         </div>
 
@@ -219,12 +257,12 @@
                     <div class="col">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="text-start text-dark p-2">Email Id</h4>
+                                <h6 class="text-start text-dark p-2 required-label">Email Id</h4>
                             </div>
 
                             <div class="col-8">
                                 <input type="email" id="cemail" class="form-control" placeholder="Enter email"
-                                    name="email">
+                                    name="email" required>
                             </div>
                         </div>
 
@@ -287,12 +325,12 @@
                     <div class="col">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="text-start text-dark p-2">Mobile No </h4>
+                                <h6 class="text-start text-dark p-2 required-label">Mobile No </h4>
                             </div>
 
                             <div class="col-8">
                                 <input type="number" class="form-control" id="cmobile" placeholder="Enter Mobile Number"
-                                    name="cmobile">
+                                    name="cmobile" required>
                             </div>
                         </div>
 
@@ -477,7 +515,7 @@
                 location.reload(); // Reload the page
             }, 3000);
             console.log("Document written with ID: ", ref.id);
-            window.location.href='addProjects.html';
+            window.location.href = 'addProjects.html';
 
         } catch (e) {
             console.error("Error adding document: ", e);

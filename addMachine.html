@@ -31,38 +31,59 @@
             padding: 20px;
         }
 
+        .navbar-nav {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 20px;
+        }
+
+        .nav-item {
+            padding: 0px 30px;
+            transition: all .4s ease-in-out;
+        }
+
+        .nav-item:hover {
+            transform: scale(1.5);
+        }
+
         .breadcrumb-item a {
             color: inherit;
             text-decoration: inherit;
         }
-        .alert-message
-        {
-            position:absolute;
-            top:70px;
-            right:30px;
+
+        .alert-message {
+            position: absolute;
+            top: 70px;
+            right: 30px;
         }
 
         .footer {
-    margin-top: 290px;
-    left: 0;
-    /* Make sure the footer spans the full width */
-    width: 100%;
-    /* Ensure the footer spans the full width */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Center vertically */
-    /* Just for visualization */
-    color: black;
-    /* Just for visualization */
-}
+            margin-top: 290px;
+            left: 0;
+            /* Make sure the footer spans the full width */
+            width: 100%;
+            /* Ensure the footer spans the full width */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Center vertically */
+            /* Just for visualization */
+            color: black;
+            /* Just for visualization */
+        }
+        .required-label::after
+        {
+            content: "*";
+            color: red;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid main">
         <div class="container-fluid nav-section mb-5">
-            <nav class="navbar navbar-expand-sm  fixed-top bg-warning">
+            <nav class="navbar navbar-expand-sm  fixed-top bg-info">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <img src="logo.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
@@ -71,28 +92,34 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse ms-5" id="mynavbar">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item ">
-                                <a class="nav-link " href="home.html">Home</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="addProjects.html">Project </a>
+                    <div class="collapse navbar-collapse" id="mynavbar">
+                        <ul class="navbar-nav me-auto" style="display: flex; justify-content: center; width: 100%;">
+                            <li class="nav-item">
+                                <a class="nav-link" href="home.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="addUser.html">User </a>
+                                <a class="nav-link" href="addProjects.html">Project</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="addUser.html">User</a>
                             </li>
                         </ul>
+                        <div>
+                        </div>
+
+
                         <form id="searchForm" class="d-flex">
-                            <input id="searchInput"  list="page"  class="form-control me-2" type="text" placeholder="Search">
+                            <input id="searchInput" list="page" class="form-control me-2" type="text"
+                                placeholder="Search">
                             <datalist id="page">
-                              <option value="home">
-                              <option value="project">
-                              <option value="user">
-                           
+                                <option value="home">
+                                <option value="project">
+                                <option value="user">
+
                             </datalist>
                             <button id="searchButton" class="btn btn-primary me-5" type="submit">Search</button>
                         </form>
+                        <div id="searchResults"></div>
                     </div>
                 </div>
             </nav>
@@ -135,12 +162,12 @@
                     <div class="col">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="text-start text-dark p-2">Project Name</h4>
+                                <h6 class="text-start text-dark p-2 required-label">Project Name</h4>
                             </div>
 
                             <div class="col-8">
                                 <input type="text" class="form-control " id="proname" placeholder="Enter Project Name"
-                                    name="proname">
+                                    name="proname" required>
                             </div>
                         </div>
 
@@ -191,12 +218,12 @@
                     <div class="col">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="text-start text-dark p-2">MQTT Topic</h4>
+                                <h6 class="text-start text-dark p-2 required-label">Serial Number</h4>
                             </div>
 
                             <div class="col-8">
-                                <input type="text" class="form-control" id="cserial" placeholder="Enter MQTT Topic"
-                                    name="cname">
+                                <input type="text" class="form-control" id="cserial" placeholder="Enter Serila  Number"
+                                    name="cname" required>
                             </div>
                         </div>
 
@@ -223,8 +250,8 @@
                             </div>
 
                             <div class="col-8">
-                                <input type="text" id="ctemplate" class="form-control"
-                                    placeholder="Enter Template Type" name="email">
+                                <input type="text" id="ctemplate" class="form-control" placeholder="Enter Template Type"
+                                    name="email">
                             </div>
                         </div>
 
@@ -256,10 +283,12 @@
             </div>
 
         </div>
-        <div class="container-fluid"><footer class="footer">
-            <h5 class="footer-content">&copy;All Rights Reserved Olive IOT</h5>
-        </footer></div>
-        
+        <div class="container-fluid">
+            <footer class="footer">
+                <h5 class="footer-content">&copy;All Rights Reserved Olive IOT</h5>
+            </footer>
+        </div>
+
 </body>
 <script type="module">
 
@@ -304,7 +333,7 @@
 
 
                     document.getElementById("proname").value = projectData.Project_Name;
-                   
+
                 } else {
                     console.error('Project data not found.');
                 }
@@ -330,8 +359,8 @@
                     document.getElementById("cmodel").value = projectData.Model;
                     document.getElementById("ctemplate").value = projectData.Template_Type;
                     document.getElementById("cinfo").value = projectData.Information;
-                    
-                   
+
+
                 } else {
                     console.error('Project data not found.');
                     getProjectData(projectName)
@@ -343,7 +372,7 @@
     }
 
 
-    
+
 
 
     // Call getProjectData when the page loads to fill input fields with project data
@@ -373,26 +402,26 @@
         console.log(proname);
 
 
-// Assuming 'db' is your Firebase database instance
-const reference = ref(db, `users/${projectName}/Machine`);
+        // Assuming 'db' is your Firebase database instance
+        const reference = ref(db, `users/${projectName}/Machine`);
 
-const newData = {
-    Machine_Location: clocation,
-    client_Name: ccname,
-    Machine_city: ccity,
-    MQTT_Topic: cserial,
-    Model: cmodel,
-    Template_Type: ctemplate,
-    Information: cinfo
-};
+        const newData = {
+            Machine_Location: clocation,
+            client_Name: ccname,
+            Machine_city: ccity,
+            MQTT_Topic: cserial,
+            Model: cmodel,
+            Template_Type: ctemplate,
+            Information: cinfo
+        };
 
-try {
-    // Use set() to update data at the specified database reference
-    await set(reference, newData);
-    console.log('Data successfully updated in Firebase Realtime Database');
-} catch (error) {
-    console.error('Error updating data in Firebase Realtime Database:', error);
-}
+        try {
+            // Use set() to update data at the specified database reference
+            await set(reference, newData);
+            console.log('Data successfully updated in Firebase Realtime Database');
+        } catch (error) {
+            console.error('Error updating data in Firebase Realtime Database:', error);
+        }
 
         const alertMessage = document.createElement('div');
         alertMessage.classList.add('alert', 'alert-success', 'alert-message');
@@ -404,7 +433,7 @@ try {
             location.reload(); // Reload the page
         }, 5000);
         console.log("Document written with ID: ", ref.id);
-        window.location.href='addProjects.html';
+        window.location.href = 'addProjects.html';
 
     });
     document.getElementById('clearInput').addEventListener('click', () => {
