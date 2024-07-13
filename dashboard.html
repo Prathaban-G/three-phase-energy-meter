@@ -418,7 +418,7 @@ function getMQTTtopic(projectName){
   onValue(MqttRef,(snapshot)=>{
     if (snapshot.exists()) {
     var mqttTopic= snapshot.val();
-    window.Project_Name="testtopic/470";
+    window.Project_Name="HW-20";
     console.log(`The Project Name is ${window.Project_Name}`);
     getProjectData(window.Project_Name);
     }
