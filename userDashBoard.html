@@ -396,7 +396,6 @@ window.onclick = function(event) {
                     const projectData = snapshot.val();
                     window.proname = projectData.pro_name;
                     console.log(window.proname);
-                    getProjectData2(proname);
                     document.getElementById('dashBoardPage').innerHTML = window.proname;
                 } else {
                     console.error('Project data not found.');
@@ -409,8 +408,9 @@ window.onclick = function(event) {
 
     document.addEventListener('DOMContentLoaded', () => {
         getProjectData(projectName);
-        
-        
+        setTimeout(() => {
+            getProjectData2(window.proname);
+        }, 1000);
     });
 
    
@@ -424,7 +424,7 @@ window.onclick = function(event) {
             if (snapshot.exists()) {
                 const projectData = snapshot.val();
                 var dataString = snapshot.val();
-                console.log(proname);
+                console.log(proname)
                 var dataObject = null;
                 try {
                     dataObject = JSON.parse(dataString);

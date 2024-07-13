@@ -9,7 +9,7 @@ import time
 
 
 # Initialize Firebase
-cred = credentials.Certificate("C:/Users/PRATHABAN/Desktop/Energy Project/three-phase-energy-meter/serviceAccountKey.json")
+cred = credentials.Certificate("C:/Users/GOKUL/Desktop/Project/three-phase-energy-meter/serviceAccountKey.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://three-phase-energy-meter-default-rtdb.firebaseio.com/'
 })
@@ -20,7 +20,7 @@ mqtt_port = 1883
 mqtt_topic = "testtopic/470"
 
 # Firebase Realtime Database Reference
-ref = db.reference('mqttData/Hw-333')
+ref = db.reference('mqttData/HW-20')
 mqtt_data_list = []
 # Callback when MQTT message is received
 def on_message(client, userdata, message):
