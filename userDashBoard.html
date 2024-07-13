@@ -419,11 +419,12 @@ window.onclick = function(event) {
     });
 
     function getProjectData2(proname) {
-        const projectRef12 = ref(database, `mqttData/HW-20/data`);
+        const projectRef12 = ref(database, `mqttData/${proname}/data`);
         onValue(projectRef12, (snapshot) => {
             if (snapshot.exists()) {
                 const projectData = snapshot.val();
                 var dataString = snapshot.val();
+                console.log(proname);
                 var dataObject = null;
                 try {
                     dataObject = JSON.parse(dataString);
