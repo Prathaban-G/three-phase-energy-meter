@@ -166,9 +166,9 @@
             <div class="row  ">
                 <div class="h4 col-4 ps-5 mt-3">Live Monitoring</div>
                 <div class="col-lg-8 d-flex justify-content-end">
-                    <div class="alert alert-primary mt-1 me-2" style="margin-bottom: 0 !important;"><span
+                    <!-- <div class="alert alert-primary mt-1 me-2" style="margin-bottom: 0 !important;"><span
                             class="me-2 m">Device status</span> <i class="fa fa-circle   pd-2" id="deviceStatus"
-                            style="font-size: 20px;" aria-hidden="true"></i></div>
+                            style="font-size: 20px;" aria-hidden="true"></i></div> -->
                     <button class="btn btn-success mt-1" id="getAllData" onclick="openModal()" ><i class="fa fa-download me-1"></i>Download
                     </button>
                     <button class="btn btn-danger mt-1 ms-2" id="refresh"><i
@@ -419,7 +419,7 @@ window.onclick = function(event) {
     });
 
     function getProjectData2(proname) {
-        const projectRef12 = ref(database, `mqttData/${proname}/data`);
+        const projectRef12 = ref(database, `mqttData/HW-20/data`);
         onValue(projectRef12, (snapshot) => {
             if (snapshot.exists()) {
                 const projectData = snapshot.val();
