@@ -430,6 +430,7 @@ function getMQTTtopic(projectName){
 
     // Fill the Input Fields
     function getProjectData(projectTopic) {
+      console.log(projectTopic);
     const projectRef12 = ref(database, `mqttData/${projectTopic}/data`);
     onValue(projectRef12, (snapshot) => {
     if (snapshot.exists()) {
