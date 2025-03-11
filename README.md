@@ -19,7 +19,7 @@ This project is a comprehensive energy monitoring dashboard for tracking three-p
 ## Screenshots
 
 ### Login Screen
-![Login Screen]([https://i.imgur.com/your-image-link-1.jpg](https://github.com/Prathaban-G/three-phase-energy-meter/blob/master/erergy-login.png))
+![https://github.com/Prathaban-G/three-phase-energy-meter/blob/master/erergy-login.png](https://github.com/Prathaban-G/three-phase-energy-meter/blob/master/erergy-login.png)
 The login page features a clean interface with the "Energy" branding and a background showcasing power transmission towers at sunset. The system is developed by Olive IoT.
 
 ### Dashboard
