@@ -23,7 +23,7 @@ This project is a comprehensive energy monitoring dashboard for tracking three-p
 The login page features a clean interface with the "Energy" branding and a background showcasing power transmission towers at sunset. The system is developed by Olive IoT.
 
 ### Dashboard
-![Dashboard](https://i.imgur.com/your-image-link-2.jpg)
+![Dashboard]([https://i.imgur.com/your-image-link-2.jpg](https://github.com/Prathaban-G/three-phase-energy-meter/blob/master/erergy-dasboard.png))
 The main dashboard provides a comprehensive overview with:
 - Product summary showing overall and live units
 - Production metrics including consumption rates
